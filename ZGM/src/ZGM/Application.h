@@ -8,7 +8,7 @@ namespace ZGM {
 	public:
 		Application();
 		virtual ~Application();
-		void Run();
+		virtual void Run();
 	};
 
 	// Client func

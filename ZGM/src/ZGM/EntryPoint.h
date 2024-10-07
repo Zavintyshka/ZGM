@@ -4,8 +4,9 @@
 extern ZGM::Application* ZGM::CreateApplication();
 
 int main(int argc, char** argv) {
+	ZGM::Logger::Init();
 	ZGM::Application* app = ZGM::CreateApplication();
-	std::cout << "Init ZGM\n";
+	ZGM_CLIENT_INFO("Client App started!");
 	app->Run();
 	delete app;
 	}

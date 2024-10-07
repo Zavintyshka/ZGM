@@ -1,4 +1,5 @@
 #include "ZGM.h"
+#include <iostream>
 
 class Sandbox : public ZGM::Application {
 public:
@@ -9,6 +10,12 @@ public:
 	~Sandbox() {
 
 	};
+	
+	void Run() override{
+		while (true) {
+
+		}
+	}
 };
 
 

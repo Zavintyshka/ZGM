@@ -11,12 +11,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\ZGM\Logger.h" />
     <ClInclude Include="src\ZGM.h" />
     <ClInclude Include="src\ZGM\Application.h" />
     <ClInclude Include="src\ZGM\Core.h" />
     <ClInclude Include="src\ZGM\EntryPoint.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\ZGM\Logger.cpp" />
     <ClCompile Include="src\ZGM\Application.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -62,6 +64,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>ZGM_PLATFORM_WINDOWS;ZGM_BUILD_DLL;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);ZGM_PLATFORM_WINDOWS;ZGM_API</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)ZGM\vendor\spdlog\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -76,6 +79,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>ZGM_PLATFORM_WINDOWS;ZGM_BUILD_DLL;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);ZGM_PLATFORM_WINDOWS;ZGM_API</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)ZGM\vendor\spdlog\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

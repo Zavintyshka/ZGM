@@ -11,6 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Events\Event.h" />
+    <ClInclude Include="src\Events\EventMouse.h" />
+    <ClInclude Include="src\zgmpch.h" />
     <ClInclude Include="src\ZGM\Logger.h" />
     <ClInclude Include="src\ZGM.h" />
     <ClInclude Include="src\ZGM\Application.h" />
@@ -18,6 +21,11 @@
     <ClInclude Include="src\ZGM\EntryPoint.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Events\EventKeyboard.h" />
+    <ClCompile Include="src\zgmpch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="src\ZGM\Logger.cpp" />
     <ClCompile Include="src\ZGM\Application.cpp" />
   </ItemGroup>
@@ -64,7 +72,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>ZGM_PLATFORM_WINDOWS;ZGM_BUILD_DLL;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);ZGM_PLATFORM_WINDOWS;ZGM_API</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)ZGM\vendor\spdlog\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ZGM\vendor\spdlog\include;$(SolutionDir)ZGM\src;</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>zgmpch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -79,7 +89,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>ZGM_PLATFORM_WINDOWS;ZGM_BUILD_DLL;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);ZGM_PLATFORM_WINDOWS;ZGM_API</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)ZGM\vendor\spdlog\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ZGM\vendor\spdlog\include;$(SolutionDir)ZGM\src;</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>zgmpch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

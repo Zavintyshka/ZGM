@@ -1,4 +1,7 @@
+#include "zgmpch.h"
 #include "Application.h"
+
+
 
 namespace ZGM {
 	Application::Application()

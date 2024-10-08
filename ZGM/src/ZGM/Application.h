@@ -1,7 +1,6 @@
 #pragma once
 #include "Core.h"
 
-
 namespace ZGM {
 	class ZGM_API Application
 	{

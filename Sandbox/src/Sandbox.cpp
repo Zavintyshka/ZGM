@@ -1,5 +1,7 @@
 #include "ZGM.h"
-#include <iostream>
+
+
+#define print(x) std::cout << x << std::endl;
 
 class Sandbox : public ZGM::Application {
 public:

@@ -1,4 +1,5 @@
 #pragma once
+#include "Graphics/WindowAPI.h"
 
 #ifdef ZGM_PLATFORM_WINDOWS
 extern ZGM::Application* ZGM::CreateApplication();

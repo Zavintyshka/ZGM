@@ -1,4 +1,6 @@
 .vs/
 bin/
-
+ZGM/x64/
+Sandbox/x64/
+Sandbox/res/
 Sandbox/Sandbox.vcxproj.user

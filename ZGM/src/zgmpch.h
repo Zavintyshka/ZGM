@@ -7,6 +7,8 @@
 #include <functional>
 #include <algorithm>
 #include <utility>
+#include <fstream>
+#include <intrin.h>
 
 // Data Structures
 #include <string>
@@ -17,4 +19,3 @@
 #ifdef ZGM_PLATFORM_WINDOWS
 	#include <Windows.h>
 #endif
-

@@ -12,13 +12,6 @@ public:
 	~Sandbox() {
 
 	};
-	
-	void Run() override{
-		ZGM::Window win(WindowProperties("My Game", 640, 480), OpenGLProperties(3,3));
-		while (true) {
-
-		}
-	}
 };
 
 

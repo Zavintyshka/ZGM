@@ -1,6 +1,12 @@
 #include "zgmpch.h"
 #include "WindowAPI.h"
 
+void ZGM::Window::OnUpdate()
+{
+    glfwSwapBuffers(m_window);
+    glfwPollEvents();
+}
+
 ZGM::Window::Window(WindowProperties winProps, OpenGLProperties oglProps)
     : m_winProps(winProps), m_oglProps(oglProps)
 {
@@ -24,15 +30,6 @@ ZGM::Window::Window(WindowProperties winProps, OpenGLProperties oglProps)
     std::string OGL_VERSION = reinterpret_cast<const char*>(glGetString(GL_VERSION));
     ZGM_ASSERT(glewInit() == 0, std::string("Driver: ") + OGL_VERSION, "GLEW initialization failed");
     ZGM_DEBUG_PRINT("--------------------------------------------------------------------------------------------");
-    
-    while (!glfwWindowShouldClose(m_window))
-    {
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        glfwSwapBuffers(m_window);
-        glfwPollEvents();
-    }
-    glfwTerminate();  
 }
 
 const char* ZGM::Window::GetTitle() const
@@ -48,4 +45,9 @@ const unsigned int ZGM::Window::GetWidth() const
 const unsigned int ZGM::Window::GetHeight() const
 {
 	return m_winProps.height;
+}
+
+GLFWwindow* ZGM::Window::GetWindow()
+{
+    return m_window;
 }

@@ -31,7 +31,8 @@ namespace ZGM {
 		inline const char* GetTitle() const;
 		inline const unsigned int GetWidth() const;
 		inline const unsigned int GetHeight() const;
-
+		void OnUpdate();
+		GLFWwindow* GetWindow();
 	};
 }
 

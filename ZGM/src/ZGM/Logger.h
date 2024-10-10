@@ -2,7 +2,7 @@
 #include "Core.h"
 #include "spdlog/spdlog.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
- 
+
 namespace ZGM {
 	class ZGM_API Logger
 	{
@@ -19,6 +19,7 @@ namespace ZGM {
 }
 
 
+#ifdef _DEBUG
 // Core Log Macros
 #define ZGM_CORE_CRITICAL(...)		ZGM::Logger::GetCoreLogger()->critical(__VA_ARGS__)
 #define ZGM_CORE_ERROR(...)			ZGM::Logger::GetCoreLogger()->error(__VA_ARGS__)
@@ -33,3 +34,18 @@ namespace ZGM {
 #define ZGM_CLIENT_INFO(...)		ZGM::Logger::GetClientLogger()->info(__VA_ARGS__)
 #define ZGM_CLIENT_TRACE(...)		ZGM::Logger::GetClientLogger()->trace(__VA_ARGS__)
 
+#else
+// Core Log Macros
+#define ZGM_CORE_CRITICAL(...)		
+#define ZGM_CORE_ERROR(...)			
+#define ZGM_CORE_WARN(...)			
+#define ZGM_CORE_INFO(...)			
+#define ZGM_CORE_TRACE(...)			
+
+// Client Log Macros
+#define ZGM_CLIENT_CRITICAL(...)	
+#define ZGM_CLIENT_ERROR(...)		
+#define ZGM_CLIENT_WARN(...)		
+#define ZGM_CLIENT_INFO(...)		
+#define ZGM_CLIENT_TRACE(...)		
+#endif

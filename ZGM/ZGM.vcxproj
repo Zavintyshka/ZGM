@@ -186,6 +186,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Events\EventKeyboard.h" />
+    <ClCompile Include="src\Events\EventWindow.h" />
     <ClCompile Include="src\Graphics\OGL_API\BufferLayout.cpp" />
     <ClCompile Include="src\Graphics\OGL_API\DebugGUI.cpp" />
     <ClCompile Include="src\Graphics\OGL_API\General.cpp" />

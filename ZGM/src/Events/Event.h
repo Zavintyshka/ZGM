@@ -21,11 +21,9 @@ namespace ZGM {
 
 		MouseMoved,
 		MouseScrolled,
-		MouseButtonClicked,
 		MouseButtonPressed,
 		MouseButtonReleased,
 
-		KeyClicked,
 		KeyPressed,
 		KeyReleased,
 
@@ -42,9 +40,8 @@ namespace ZGM {
 	};
 
 	class Event {
-	protected:
-		bool m_isEventHandled = false;
 	public:
+		bool m_isEventHandled = false;
 		inline bool IsEventInCateory(EventCategory category) const {
 			return GetCategoryFlag() & category;
 		};
@@ -67,8 +64,8 @@ namespace ZGM {
 
 		template <typename T>
 		bool Dispatch(EventFN<T> eventFN) {
-			if (m_eventObj.GetEventType() == T::GetStaticType()) {
-				m_eventObj.m_isEventHandled = func(*(T*)&m_eventObj);
+			if (m_eventObj.GetEventType() == T::GetStaticEventType()) {
+				m_eventObj.m_isEventHandled = eventFN(*(T*)&m_eventObj);
 				return true;
 			}
 			return false;
@@ -77,7 +74,7 @@ namespace ZGM {
 	};
 }
 
-std::ostream& operator<<(std::ostream& os, const ZGM::Event& eventObj) {
+inline std::ostream& operator<<(std::ostream& os, const ZGM::Event& eventObj) {
 	os << eventObj.ToString();
 	return os;
 }

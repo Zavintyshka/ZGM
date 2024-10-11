@@ -24,6 +24,8 @@
     <ClInclude Include="src\Graphics\OGL_API\VertexBuffer.h" />
     <ClInclude Include="src\Graphics\WindowAPI.h" />
     <ClInclude Include="src\zgmpch.h" />
+    <ClInclude Include="src\ZGM\Layer.h" />
+    <ClInclude Include="src\ZGM\LayerStack.h" />
     <ClInclude Include="src\ZGM\Logger.h" />
     <ClInclude Include="src\ZGM.h" />
     <ClInclude Include="src\ZGM\Application.h" />
@@ -201,6 +203,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\ZGM\Layer.cpp" />
+    <ClCompile Include="src\ZGM\LayerStack.cpp" />
     <ClCompile Include="src\ZGM\Logger.cpp" />
     <ClCompile Include="src\ZGM\Application.cpp" />
     <ClCompile Include="vendor\glm\detail\glm.cpp" />

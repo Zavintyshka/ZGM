@@ -1,5 +1,7 @@
 #pragma once
 #include "Core.h"
+#include "LayerStack.h"
+#include "Layer.h"
 #include "Graphics/WindowAPI.h"
 
 namespace ZGM {
@@ -8,6 +10,10 @@ namespace ZGM {
 	private:
 		std::unique_ptr<Window> m_windowObj;
 		bool m_running = true;
+
+	protected:
+		LayerStack m_layerStack;
+
 	public:
 		Application();
 		virtual ~Application();

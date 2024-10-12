@@ -11,6 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\GLAD\glad.h" />
+    <ClInclude Include="include\GLAD\khrplatform.h" />
     <ClInclude Include="src\Events\Event.h" />
     <ClInclude Include="src\Events\EventMouse.h" />
     <ClInclude Include="src\Graphics\OGL_API\BufferLayout.h" />
@@ -189,6 +191,7 @@
   <ItemGroup>
     <ClCompile Include="src\Events\EventKeyboard.h" />
     <ClCompile Include="src\Events\EventWindow.h" />
+    <ClCompile Include="src\glad.cpp" />
     <ClCompile Include="src\Graphics\OGL_API\BufferLayout.cpp" />
     <ClCompile Include="src\Graphics\OGL_API\DebugGUI.cpp" />
     <ClCompile Include="src\Graphics\OGL_API\General.cpp" />

@@ -1,7 +1,8 @@
 #pragma once
 
 // OpenGL
-#include "GLEW/glew.h"
+#include "GLAD/glad.h"
+//#include "GLEW/glew.h"
 #include "GLFW/glfw3.h"
 
 #define print(x) std::cout << x << std::endl

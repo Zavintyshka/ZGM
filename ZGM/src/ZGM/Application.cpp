@@ -17,8 +17,6 @@ namespace ZGM {
 
 	void Application::Run()
 	{
-
-
 		GLFWwindow* winPtr = m_windowObj->GetWindow();
 		while (m_running) {
 			glClearColor(0.0f, 0.271f, 0.141f, 1.0f);

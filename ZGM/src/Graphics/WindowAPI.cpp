@@ -33,8 +33,9 @@ ZGM::Window::Window(WindowProperties winProps, OpenGLProperties oglProps)
     glfwMakeContextCurrent(m_window);
     glfwSwapInterval(1);
 
+    ZGM_ASSERT(gladLoadGLLoader((GLADloadproc)glfwGetProcAddress), "GLAD has successfully found pointers to OpenGL functions", "GLAD initialization failed");
     std::string OGL_VERSION = reinterpret_cast<const char*>(glGetString(GL_VERSION));
-    ZGM_ASSERT(glewInit() == 0, std::string("Driver: ") + OGL_VERSION, "GLEW initialization failed");
+    ZGM_CORE_INFO("{0} {1}", "Driver:", OGL_VERSION);
     ZGM_DEBUG_PRINT("--------------------------------------------------------------------------------------------");
 
     // GLFW Callbacks

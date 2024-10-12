@@ -24,4 +24,9 @@ bool ZGM::Layer::isOverlay() const
 ZGM::Layer::Layer(const char* name, bool isOverlay)
 	: m_name(name), m_isOverlay(isOverlay) {}
 
+ZGM::Layer::~Layer()
+{
+
+}
+
  

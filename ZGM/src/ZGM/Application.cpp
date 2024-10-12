@@ -44,7 +44,7 @@ namespace ZGM {
 			it--;
 			if (event.m_isEventHandled)
 				break;
-			it->OnEvent(event);
+			(*it)->OnEvent(event);
 		}
 
 	}

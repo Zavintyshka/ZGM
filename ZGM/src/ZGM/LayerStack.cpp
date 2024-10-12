@@ -11,29 +11,34 @@ ZGM::LayerStack::LayerStack()
 ZGM::LayerStack::~LayerStack()
 {
 	ZGM_CORE_INFO("Layers was deleted");
+
+	for (auto it = Begin(); it != End(); it++) {
+		delete (*it);
+	}
+
 	m_layerStack.clear();
 }
 
-void ZGM::LayerStack::InsertLayer(const char* layerName, bool isOverlayLayer)
+void ZGM::LayerStack::InsertLayer(Layer* layer)
 {
-	if (isOverlayLayer) {
-		m_layerStack.emplace_back(layerName, isOverlayLayer);
+	if ((*layer).isOverlay()) {
+		m_layerStack.push_back(layer);
 	}
 	else {
-		m_layerStack.emplace(m_layerStack.begin() + m_last_overlay_index, layerName, isOverlayLayer);
+		m_layerStack.insert(m_layerStack.begin() + m_last_overlay_index, layer);
 		m_last_overlay_index++;
 	}
 
-	ZGM_CLIENT_INFO("User Layer {0} initialized", layerName);
+	ZGM_CLIENT_INFO("User Layer {0} initialized", (*layer).GetName());
 }
 
-std::vector<ZGM::Layer>::iterator ZGM::LayerStack::Begin()
+std::vector<ZGM::Layer*>::iterator ZGM::LayerStack::Begin()
 {
 	return m_layerStack.begin();
 }
 
 
-std::vector<ZGM::Layer>::iterator ZGM::LayerStack::End()
+std::vector<ZGM::Layer*>::iterator ZGM::LayerStack::End()
 {
 	return m_layerStack.end();
 }

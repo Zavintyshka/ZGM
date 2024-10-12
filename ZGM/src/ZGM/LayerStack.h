@@ -6,16 +6,16 @@
 namespace ZGM {
 	class ZGM_API LayerStack {
 	private:
-		std::vector<Layer> m_layerStack;
+		std::vector<Layer*> m_layerStack;
 		int m_last_overlay_index;
 	public:
 		LayerStack();
 		~LayerStack();
 
-		void InsertLayer(const char* layerName, bool isOverlayLayer);
+		void InsertLayer(Layer* layer);
 
-		std::vector<Layer>::iterator Begin();
-		std::vector<Layer>::iterator End();
+		std::vector<Layer*>::iterator Begin();
+		std::vector<Layer*>::iterator End();
 	};
 }
 

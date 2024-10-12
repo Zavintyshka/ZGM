@@ -10,9 +10,9 @@ namespace ZGM {
 		bool m_isOverlay;
 	public:
 		Layer(const char* name, bool isOverlay);
+		virtual ~Layer() = 0;
 		void virtual OnUpdate();
 		void virtual OnEvent(Event& event);
-
 		const char* GetName() const;
 		bool isOverlay() const;
 	};

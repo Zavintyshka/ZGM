@@ -1,55 +1,40 @@
 #include "ZGM.h"
 
-
-class GraphicsLayer : public ZGM::Layer {
+class DebugLayer : public ZGM::Layer {
+private:
+	DebugGUI m_debugGUI;
 public:
-	GraphicsLayer(const char* name, bool isOverlay)
-		: Layer(name, isOverlay)
-	{}
+	DebugLayer(const char* name, bool isOverlay, GLFWwindow* windowPtr)
+		: Layer(name, isOverlay), m_debugGUI(windowPtr, "#version 460", 1.5)
+	{};
+	~DebugLayer() override {};
+
+	//void OnEvent(ZGM::Event& event) override {
+
+	//};
+
 	void OnUpdate() override {
+		m_debugGUI.NewFrame();
 
-	}
+		m_debugGUI.Begin("Hello, ImGui!");
+		if (m_debugGUI.Button("Click me")) {
+			m_debugGUI.Text("Button clicked!");
+		}
+		m_debugGUI.End();
+	};
 
-	void OnEvent(ZGM::Event& event) override {
-		ZGM_CLIENT_INFO("{0} handled by {1} layer", event.ToString(), GetName());
-	}
-
-	~GraphicsLayer() override {
-
+	void OnRender() override {
+		m_debugGUI.Render();
 	}
 };
-
-
-
-class OverlayUpperLayer : public ZGM::Layer {
-public:
-	OverlayUpperLayer(const char* name, bool isOverlay)
-		: Layer(name, isOverlay)
-	{}
-	void OnUpdate() override {
-
-	}
-
-	void OnEvent(ZGM::Event& event) override {
-		ZGM_CLIENT_INFO("{0} handled by {1} layer", event.ToString(), GetName());
-	}
-
-	~OverlayUpperLayer() override {
-
-	}
-};
-
 
 
 
 class Sandbox : public ZGM::Application {
 public:
 	Sandbox() {
-		GraphicsLayer* gl = new GraphicsLayer("Graphics", false);
-		OverlayUpperLayer* ol = new OverlayUpperLayer("OverlayUpper", true);
-
-		m_layerStack.InsertLayer(gl);
-		m_layerStack.InsertLayer(ol);
+		DebugLayer* dl = new DebugLayer("ImGUI Debug", true, m_windowObj->GetWindow());
+		m_layerStack.InsertLayer(dl);
 
 	};
 

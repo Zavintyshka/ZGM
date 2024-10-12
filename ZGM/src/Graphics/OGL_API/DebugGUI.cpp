@@ -34,20 +34,38 @@ DebugGUI::~DebugGUI()
     print("GUI Destructed");
 }
 
-void DebugGUI::NewFrame() const
+void DebugGUI::NewFrame()
 {
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
 }
 
-void DebugGUI::Render() const
+void DebugGUI::Render()
 {
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-const ImGuiIO& DebugGUI::GetIO() const
+const ImGuiIO& DebugGUI::GetIO()
 {
     return ImGui::GetIO();
+}
+
+// ImGui Wrapper
+
+bool DebugGUI::Begin(const char* title) {
+    return ImGui::Begin(title);
+}
+
+bool DebugGUI::Button(const char* title) {
+    return ImGui::Button(title);
+}
+
+void DebugGUI::Text(const char* text) {
+    ImGui::Text(text);
+}
+
+void DebugGUI::End() {
+    ImGui::End();
 }

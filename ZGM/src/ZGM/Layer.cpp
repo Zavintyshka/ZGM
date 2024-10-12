@@ -11,6 +11,10 @@ void ZGM::Layer::OnEvent(Event& event)
 	ZGM_CLIENT_INFO("{0} handled by {1} layer", event.ToString(), GetName());
 }
 
+void ZGM::Layer::OnRender() {
+
+}
+
 const char* ZGM::Layer::GetName() const
 {
 	return m_name;

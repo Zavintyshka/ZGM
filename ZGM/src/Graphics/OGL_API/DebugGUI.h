@@ -13,7 +13,12 @@ public:
 	DebugGUI(GLFWwindow* window, const char* OpenGLVersion, float scale);
 	~DebugGUI();
 	
-	void NewFrame() const;
-	void Render() const;
-	const ImGuiIO& GetIO() const;
+	static void NewFrame();
+	static void Render();
+	static const ImGuiIO& GetIO();
+
+	bool Begin(const char* title);
+	bool Button(const char* title);
+	void Text(const char* text);
+	void End();
 };

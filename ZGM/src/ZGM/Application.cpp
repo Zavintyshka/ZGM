@@ -6,11 +6,10 @@
 
 
 namespace ZGM {
-#define BIND_EVENT_CALLBACK(func) std::bind(&Application::func, this, std::placeholders::_1)
 	Application::Application()
 		: m_windowObj(std::make_unique<Window>())
 	{
-		m_windowObj->SetEventCallbackFN(BIND_EVENT_CALLBACK(OnEvent));
+		m_windowObj->SetEventCallbackFN(BIND_EVENT_CALLBACK(Application::OnEvent));
 	}
 
 	Application::~Application()
@@ -40,7 +39,7 @@ namespace ZGM {
 	void Application::OnEvent(Event& event)
 	{
 		DispatchEvent dispatcher(event);
-		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_CALLBACK(OnWindowClose));
+		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_CALLBACK(Application::OnWindowClose));
 		ZGM_CORE_INFO(event.ToString());
 
 		// Layer OnEvent

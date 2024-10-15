@@ -4,6 +4,8 @@
 #include "Layer.h"
 #include "Graphics/WindowAPI.h"
 
+#define BIND_EVENT_CALLBACK(func) std::bind(&func, this, std::placeholders::_1)
+
 namespace ZGM {
 	class ZGM_API Application
 	{

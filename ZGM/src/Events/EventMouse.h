@@ -1,3 +1,4 @@
+#pragma once
 #include "Event.h"
 
 namespace ZGM {
@@ -14,6 +15,10 @@ namespace ZGM {
 			return message.str();
 		}
 
+		inline double GetXPos() const { return m_xPos; };
+		inline double GetYPos() const { return m_yPos; };
+
+		
 		EVENT_SUBCLASS_TYPE_DERERM(MouseMoved);
 		EVENT_SUBCLASS_CATEGORY_DETERM(EventCategoryInput | EventCategoryMouse);
 	};
@@ -22,8 +27,11 @@ namespace ZGM {
 	class MouseScrolledEvent : public Event {
 	private:
 		const char* m_direction;
+		double m_wheelY;
 	public:
-		MouseScrolledEvent(double yOffset) {
+		MouseScrolledEvent(double yOffset)
+			: m_wheelY(yOffset)
+		{
 			m_direction = yOffset > 0 ? "Up" : "Down";
 		}
 
@@ -32,6 +40,10 @@ namespace ZGM {
 			message << "Event: " << GetName() << " Direction: " << m_direction;
 			return message.str();
 		}
+
+		inline const char* GetDirection() const {
+			return m_direction;
+		};
 
 		EVENT_SUBCLASS_TYPE_DERERM(MouseScrolled);
 		EVENT_SUBCLASS_CATEGORY_DETERM(EventCategoryInput | EventCategoryMouse);
@@ -50,6 +62,8 @@ namespace ZGM {
 			return message.str();
 		}
 
+		inline int GetKeyCode() const { return m_keyCode; };
+
 		EVENT_SUBCLASS_TYPE_DERERM(MouseButtonPressed);
 		EVENT_SUBCLASS_CATEGORY_DETERM(EventCategoryInput | EventCategoryMouse);
 	};
@@ -66,6 +80,8 @@ namespace ZGM {
 			message << "Event: " << GetName() << " Key Code: " << m_keyCode;
 			return message.str();
 		}
+
+		inline int GetKeyCode() const { return m_keyCode; };
 
 		EVENT_SUBCLASS_TYPE_DERERM(MouseButtonReleased);
 		EVENT_SUBCLASS_CATEGORY_DETERM(EventCategoryInput | EventCategoryMouse);

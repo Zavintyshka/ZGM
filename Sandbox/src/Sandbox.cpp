@@ -9,9 +9,26 @@ public:
 	{};
 	~DebugLayer() override {};
 
-	//void OnEvent(ZGM::Event& event) override {
+	void OnEvent(ZGM::Event& event) override {
+		ZGM::DispatchEvent dispatcher(event);
+		dispatcher.Dispatch<ZGM::MouseMovedEvent>([this](ZGM::MouseMovedEvent& event) {
+			return this->m_debugGUI.OnMouseMoved(event);
+			});
 
-	//};
+		dispatcher.Dispatch<ZGM::MouseButtonPressedEvent>([this](ZGM::MouseButtonPressedEvent& event) {
+			return this->m_debugGUI.OnMousePressed(event);
+			});
+
+		dispatcher.Dispatch<ZGM::MouseButtonReleasedEvent>([this](ZGM::MouseButtonReleasedEvent& event) {
+			return this->m_debugGUI.OnMouseReleased(event);
+			});
+
+		dispatcher.Dispatch<ZGM::MouseScrolledEvent>([this](ZGM::MouseScrolledEvent& event) {
+			return this->m_debugGUI.OnMouseScrolled(event);
+			});
+
+		ZGM::Layer::OnEvent(event);
+	};
 
 	void OnUpdate() override {
 		m_debugGUI.NewFrame();
@@ -35,7 +52,6 @@ public:
 	Sandbox() {
 		DebugLayer* dl = new DebugLayer("ImGUI Debug", true, m_windowObj->GetWindow());
 		m_layerStack.InsertLayer(dl);
-
 	};
 
 	~Sandbox() {

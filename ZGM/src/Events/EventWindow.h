@@ -1,3 +1,4 @@
+#pragma once
 #include "zgmpch.h"
 #include "Event.h"
 

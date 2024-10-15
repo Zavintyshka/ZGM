@@ -1,4 +1,5 @@
 #include "zgmpch.h"
+#include "ZGM/Logger.h"
 #include "DebugGUI.h"
 
 
@@ -47,7 +48,7 @@ void DebugGUI::Render()
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-const ImGuiIO& DebugGUI::GetIO()
+ImGuiIO& DebugGUI::GetIO()
 {
     return ImGui::GetIO();
 }
@@ -68,4 +69,41 @@ void DebugGUI::Text(const char* text) {
 
 void DebugGUI::End() {
     ImGui::End();
+}
+
+bool DebugGUI::OnMouseMoved(ZGM::MouseMovedEvent& event)
+{
+    ZGM_CLIENT_INFO("OnMouseMoved ImGui");
+    ImGuiIO& io = GetIO();
+    ImVec2 eventPos(event.GetXPos(), event.GetYPos());
+    io.MousePos = eventPos;
+    return false;
+}
+
+bool DebugGUI::OnMousePressed(ZGM::MouseButtonPressedEvent& event)
+{
+    ImGuiIO& io = GetIO();
+    const ImGuiMouseButton button = event.GetKeyCode();
+    io.MouseDown[button] = true;
+    io.MouseSource = ImGuiMouseSource::ImGuiMouseSource_Mouse;
+    return false;
+}
+
+bool DebugGUI::OnMouseReleased(ZGM::MouseButtonReleasedEvent& event)
+{
+    ImGuiIO& io = GetIO();
+    const ImGuiMouseButton button = event.GetKeyCode();
+    io.MouseDown[button] = false;
+    io.MouseSource = ImGuiMouseSource::ImGuiMouseSource_Mouse;
+
+    return false;
+}
+
+bool DebugGUI::OnMouseScrolled(ZGM::MouseScrolledEvent& event)
+{
+    ImGuiIO& io = GetIO();
+    io.MouseWheel += event.GetDirection() == "Up" ? 1.0f : -1.0f;
+    io.MouseSource = ImGuiMouseSource::ImGuiMouseSource_Mouse;
+
+    return false;
 }

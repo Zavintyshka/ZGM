@@ -3,6 +3,7 @@
 #include "LayerStack.h"
 #include "Layer.h"
 #include "Graphics/WindowAPI.h"
+#include "Input.h"
 
 #define BIND_EVENT_CALLBACK(func) std::bind(&func, this, std::placeholders::_1)
 
@@ -11,6 +12,7 @@ namespace ZGM {
 	{
 	private:
 		bool m_running = true;
+		Input* m_inputPolling;
 
 	protected:
 		std::unique_ptr<Window> m_windowObj;

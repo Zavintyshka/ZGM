@@ -10,6 +10,7 @@ namespace ZGM {
 		: m_windowObj(std::make_unique<Window>())
 	{
 		m_windowObj->SetEventCallbackFN(BIND_EVENT_CALLBACK(Application::OnEvent));
+		m_inputPolling = new Input(m_windowObj->GetWindow());
 	}
 
 	Application::~Application()
@@ -32,6 +33,10 @@ namespace ZGM {
 			for (auto it = m_layerStack.Begin(); it != m_layerStack.End(); it++) {
 				(*it)->OnRender();
 			}
+
+			// Input Polling
+			MousePosition mousePos = m_inputPolling->GetMousePosition();
+			ZGM_CORE_INFO("Check Mouse Position through input polling: ({0}, {1})", mousePos.xPos, mousePos.yPos);
 
 			m_windowObj->OnUpdate();
 		}

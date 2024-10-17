@@ -546,6 +546,9 @@
     <ClInclude Include="src\ZGM\Input.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\ZGM\KeyMapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ZGM\Application.cpp">

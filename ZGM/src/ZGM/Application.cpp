@@ -34,10 +34,6 @@ namespace ZGM {
 				(*it)->OnRender();
 			}
 
-			// Input Polling
-			MousePosition mousePos = m_inputPolling->GetMousePosition();
-			ZGM_CORE_INFO("Check Mouse Position through input polling: ({0}, {1})", mousePos.xPos, mousePos.yPos);
-
 			m_windowObj->OnUpdate();
 		}
 	}

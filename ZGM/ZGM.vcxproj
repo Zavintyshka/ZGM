@@ -27,6 +27,7 @@
     <ClInclude Include="src\Graphics\WindowAPI.h" />
     <ClInclude Include="src\zgmpch.h" />
     <ClInclude Include="src\ZGM\Input.h" />
+    <ClInclude Include="src\ZGM\KeyMapper.h" />
     <ClInclude Include="src\ZGM\Layer.h" />
     <ClInclude Include="src\ZGM\LayerStack.h" />
     <ClInclude Include="src\ZGM\Logger.h" />
@@ -377,7 +378,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>ZGM_PLATFORM_WINDOWS;ZGM_BUILD_DLL;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);ZGM_PLATFORM_WINDOWS;ZGM_API;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>USE_GLFW;ZGM_PLATFORM_WINDOWS;ZGM_BUILD_DLL;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);ZGM_PLATFORM_WINDOWS;ZGM_API;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)ZGM\vendor\spdlog\include;$(SolutionDir)ZGM\src;$(SolutionDir)ZGM\include;$(SolutionDir)ZGM\src\Graphics\OGL_API\;$(SolutionDir)ZGM\vendor\;</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>

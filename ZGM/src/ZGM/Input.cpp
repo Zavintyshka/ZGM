@@ -7,7 +7,7 @@ namespace ZGM {
 
 	bool Input::IsKeyPressed(int keyCode) {
 		int keyState = glfwGetKey(m_windowPtr, keyCode);
-		return keyState == GLFW_PRESS || keyState == GLFW_RELEASE;
+		return keyState;
 	}
 	bool Input::IsMouseButtonPressed(int mouseButton)
 	{

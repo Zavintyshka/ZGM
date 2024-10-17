@@ -46,12 +46,32 @@ public:
 };
 
 
+class InputPollingLayer: public ZGM::Layer {
+private:
+	ZGM::Input* m_inputPollingObj;
+public:
+	InputPollingLayer(const char*name, bool isOverlay, GLFWwindow* windowPtr)
+	: ZGM::Layer(name, isOverlay) {
+		m_inputPollingObj = new ZGM::Input(windowPtr);
+	};
+	~InputPollingLayer() override {};
+
+	void OnUpdate() override {
+		// Input Polling
+		MousePosition mousePos = m_inputPollingObj->GetMousePosition();
+		ZGM_CLIENT_INFO("Check Mouse Position through input polling: ({0}, {1})", mousePos.xPos, mousePos.yPos);
+		ZGM_CLIENT_INFO("Is 'Q' pressed: {0}", m_inputPollingObj->IsKeyPressed(ZGM_KEY_Q));
+	};
+};
+
 
 class Sandbox : public ZGM::Application {
 public:
 	Sandbox() {
 		DebugLayer* dl = new DebugLayer("ImGUI Debug", true, m_windowObj->GetWindow());
+		InputPollingLayer* ipl = new InputPollingLayer("Input Polling", "true", m_windowObj->GetWindow());
 		m_layerStack.InsertLayer(dl);
+		m_layerStack.InsertLayer(ipl);
 	};
 
 	~Sandbox() {

@@ -1,4 +1,5 @@
 #pragma once
+#include "KeyMapper.h"
 
 #ifdef ZGM_PLATFORM_WINDOWS
 	#ifdef ZGM_BUILD_DLL

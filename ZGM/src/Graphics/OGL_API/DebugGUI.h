@@ -20,6 +20,7 @@ public:
 	static void Render();
 	static ImGuiIO& GetIO();
 
+	void MakeViewport();
 	bool Begin(const char* title);
 	bool Button(const char* title);
 	void Text(const char* text);

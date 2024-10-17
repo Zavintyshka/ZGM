@@ -45,6 +45,13 @@ void DebugGUI::NewFrame()
 void DebugGUI::Render()
 {
     ImGui::Render();
+    if (ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+    {
+        GLFWwindow* backup_current_context = glfwGetCurrentContext();
+        ImGui::UpdatePlatformWindows();
+        ImGui::RenderPlatformWindowsDefault();
+        glfwMakeContextCurrent(backup_current_context);
+    }
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
@@ -54,6 +61,11 @@ ImGuiIO& DebugGUI::GetIO()
 }
 
 // ImGui Wrapper
+
+void DebugGUI::MakeViewport()
+{
+    ImGui::DockSpaceOverViewport();
+}
 
 bool DebugGUI::Begin(const char* title) {
     return ImGui::Begin(title);

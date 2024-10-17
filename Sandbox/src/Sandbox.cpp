@@ -6,37 +6,51 @@ private:
 public:
 	DebugLayer(const char* name, bool isOverlay, GLFWwindow* windowPtr)
 		: Layer(name, isOverlay), m_debugGUI(windowPtr, "#version 460", 1.5)
-	{};
+	{
+		m_debugGUI.GetIO().ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+		m_debugGUI.GetIO().ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+	};
 	~DebugLayer() override {};
 
-	void OnEvent(ZGM::Event& event) override {
-		ZGM::DispatchEvent dispatcher(event);
-		dispatcher.Dispatch<ZGM::MouseMovedEvent>([this](ZGM::MouseMovedEvent& event) {
-			return this->m_debugGUI.OnMouseMoved(event);
-			});
+	//void OnEvent(ZGM::Event& event) override {
+	//	ZGM::DispatchEvent dispatcher(event);
+	//	dispatcher.Dispatch<ZGM::MouseMovedEvent>([this](ZGM::MouseMovedEvent& event) {
+	//		return this->m_debugGUI.OnMouseMoved(event);
+	//		});
 
-		dispatcher.Dispatch<ZGM::MouseButtonPressedEvent>([this](ZGM::MouseButtonPressedEvent& event) {
-			return this->m_debugGUI.OnMousePressed(event);
-			});
+	//	dispatcher.Dispatch<ZGM::MouseButtonPressedEvent>([this](ZGM::MouseButtonPressedEvent& event) {
+	//		return this->m_debugGUI.OnMousePressed(event);
+	//		});
 
-		dispatcher.Dispatch<ZGM::MouseButtonReleasedEvent>([this](ZGM::MouseButtonReleasedEvent& event) {
-			return this->m_debugGUI.OnMouseReleased(event);
-			});
+	//	dispatcher.Dispatch<ZGM::MouseButtonReleasedEvent>([this](ZGM::MouseButtonReleasedEvent& event) {
+	//		return this->m_debugGUI.OnMouseReleased(event);
+	//		});
 
-		dispatcher.Dispatch<ZGM::MouseScrolledEvent>([this](ZGM::MouseScrolledEvent& event) {
-			return this->m_debugGUI.OnMouseScrolled(event);
-			});
+	//	dispatcher.Dispatch<ZGM::MouseScrolledEvent>([this](ZGM::MouseScrolledEvent& event) {
+	//		return this->m_debugGUI.OnMouseScrolled(event);
+	//		});
 
-		ZGM::Layer::OnEvent(event);
-	};
+	//	ZGM::Layer::OnEvent(event);
+	//};
 
 	void OnUpdate() override {
 		m_debugGUI.NewFrame();
+		
+		m_debugGUI.MakeViewport();
+		m_debugGUI.Begin("Explorer");
+		m_debugGUI.Text("HelloWorld.txt");
+		m_debugGUI.Text("MyFile.txt");
+		m_debugGUI.Text("main.cpp");
+		m_debugGUI.End();
 
-		m_debugGUI.Begin("Hello, ImGui!");
-		if (m_debugGUI.Button("Click me")) {
-			m_debugGUI.Text("Button clicked!");
-		}
+		m_debugGUI.Begin("Object Properties");
+		m_debugGUI.Text("Speed:");
+		m_debugGUI.Text("Position:");
+		m_debugGUI.Text("Opacity:");
+		m_debugGUI.End();
+
+		m_debugGUI.Begin("Terminal");
+		m_debugGUI.Text("python3 && print('Hello World!')");
 		m_debugGUI.End();
 	};
 

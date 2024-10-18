@@ -549,6 +549,21 @@
     <ClInclude Include="src\ZGM\KeyMapper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\ZGM\Rendering\GraphicalContext\Context.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ZGM\Rendering\GraphicalContext\OpenGLContext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ZGM\Rendering\RenderAPI\RenderAPI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ZGM\Rendering\Renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ZGM\Application.cpp">
@@ -633,6 +648,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\ZGM\Input.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ZGM\Rendering\GraphicalContext\OpenGLContext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

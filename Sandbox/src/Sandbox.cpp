@@ -70,11 +70,15 @@ public:
 	};
 	~InputPollingLayer() override {};
 
+	void OnEvent(ZGM::Event& event) override{
+
+	}
+
 	void OnUpdate() override {
 		// Input Polling
-		MousePosition mousePos = m_inputPollingObj->GetMousePosition();
-		ZGM_CLIENT_INFO("Check Mouse Position through input polling: ({0}, {1})", mousePos.xPos, mousePos.yPos);
-		ZGM_CLIENT_INFO("Is 'Q' pressed: {0}", m_inputPollingObj->IsKeyPressed(ZGM_KEY_Q));
+		//MousePosition mousePos = m_inputPollingObj->GetMousePosition();
+		//ZGM_CLIENT_INFO("Check Mouse Position through input polling: ({0}, {1})", mousePos.xPos, mousePos.yPos);
+		//ZGM_CLIENT_INFO("Is 'Q' pressed: {0}", m_inputPollingObj->IsKeyPressed(ZGM_KEY_Q));
 	};
 };
 

@@ -2,12 +2,12 @@
 #include "ZGM/Core.h"
 #include "ZGM/Logger.h"
 
-#include "General.h"
-
 #include "Events/Event.h"
 #include "Events/EventWindow.h"
 #include "Events/EventMouse.h"
 #include "Events/EventKeyboard.h"
+
+#include "ZGM/Rendering/GraphicalContext/OpenGLContext.h"
 
 
 
@@ -37,6 +37,8 @@ namespace ZGM {
 		WindowProperties m_winProps;
 		OpenGLProperties m_oglProps;
 		GLFWwindow* m_window;
+		Context* m_context;
+
 
 		using EventCallbackFN = std::function<void(Event&)>;
 		

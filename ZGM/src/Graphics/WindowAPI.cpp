@@ -1,10 +1,20 @@
 #include "zgmpch.h"
 #include "WindowAPI.h"
 
+// ---Graphical API---
+#define OPENGL_GRAPHICAL_API 1;
+/*
+#define DIRECTX12_GRAPHICAL_API 1;
+#define DIRECTX11_GRAPHICAL_API 1;
+#define VULCAN_GRAPHICAL_API 1;
+#define METAL_GRAPHICAL_API 1;
+*/
+// ---Graphical API---
+
 
 void ZGM::Window::OnUpdate()
 {
-    glfwSwapBuffers(m_window);
+    m_context->SwapBuffers();
     glfwPollEvents();
 }
 
@@ -30,8 +40,15 @@ ZGM::Window::Window(WindowProperties winProps, OpenGLProperties oglProps)
     ZGM_CORE_INFO("Title: \"{0}\"", m_winProps.title);
     ZGM_CORE_INFO("Resolution: ({0},{1})", m_winProps.width, m_winProps.height);
 
-    glfwMakeContextCurrent(m_window);
-    glfwSwapInterval(1);
+    // --Context--
+#ifdef OPENGL_GRAPHICAL_API
+    m_context = new OpenGLContext(m_window);
+#endif
+   
+    m_context->Init();
+    ZGM_ASSERT(m_context->VSync(true), "VSync: On", "VSync: Off");
+    // --Context--
+    
 
     ZGM_ASSERT(gladLoadGLLoader((GLADloadproc)glfwGetProcAddress), "GLAD has successfully found pointers to OpenGL functions", "GLAD initialization failed");
     std::string OGL_VERSION = reinterpret_cast<const char*>(glGetString(GL_VERSION));

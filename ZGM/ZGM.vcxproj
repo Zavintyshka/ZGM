@@ -35,6 +35,11 @@
     <ClInclude Include="src\ZGM\Application.h" />
     <ClInclude Include="src\ZGM\Core.h" />
     <ClInclude Include="src\ZGM\EntryPoint.h" />
+    <ClInclude Include="src\ZGM\Rendering\GraphicalContext\Context.h" />
+    <ClInclude Include="src\ZGM\Rendering\GraphicalContext\OpenGLContext.h" />
+    <ClInclude Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI.h" />
+    <ClInclude Include="src\ZGM\Rendering\RenderAPI\RenderAPI.h" />
+    <ClInclude Include="src\ZGM\Rendering\Renderer.h" />
     <ClInclude Include="vendor\glm\common.hpp" />
     <ClInclude Include="vendor\glm\detail\func_common.hpp" />
     <ClInclude Include="vendor\glm\detail\func_exponential.hpp" />
@@ -213,6 +218,7 @@
     <ClCompile Include="src\ZGM\LayerStack.cpp" />
     <ClCompile Include="src\ZGM\Logger.cpp" />
     <ClCompile Include="src\ZGM\Application.cpp" />
+    <ClCompile Include="src\ZGM\Rendering\GraphicalContext\OpenGLContext.cpp" />
     <ClCompile Include="vendor\glm\detail\glm.cpp" />
     <ClCompile Include="vendor\imgui\imgui.cpp" />
     <ClCompile Include="vendor\imgui\imgui_demo.cpp" />

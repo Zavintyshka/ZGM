@@ -1,11 +1,8 @@
 #pragma once
 #include "Context.h"
 
-// API
 #include "GLAD/glad.h"
 #include <GLFW/glfw3.h>
-
-
 
 namespace ZGM {
 	class OpenGLContext : public Context {

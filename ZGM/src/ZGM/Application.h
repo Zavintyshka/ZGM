@@ -2,7 +2,7 @@
 #include "Core.h"
 #include "LayerStack.h"
 #include "Layer.h"
-#include "Graphics/WindowAPI.h"
+#include "WindowAPI.h"
 #include "Input.h"
 
 #define BIND_EVENT_CALLBACK(func) std::bind(&func, this, std::placeholders::_1)

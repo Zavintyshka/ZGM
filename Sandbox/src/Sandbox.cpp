@@ -36,18 +36,18 @@ public:
 	void OnUpdate() override {
 		m_debugGUI.NewFrame();
 		
-		m_debugGUI.MakeViewport();
-		m_debugGUI.Begin("Explorer");
-		m_debugGUI.Text("HelloWorld.txt");
-		m_debugGUI.Text("MyFile.txt");
-		m_debugGUI.Text("main.cpp");
-		m_debugGUI.End();
+		//m_debugGUI.MakeViewport();
+		//m_debugGUI.Begin("Explorer");
+		//m_debugGUI.Text("HelloWorld.txt");
+		//m_debugGUI.Text("MyFile.txt");
+		//m_debugGUI.Text("main.cpp");
+		//m_debugGUI.End();
 
-		m_debugGUI.Begin("Object Properties");
-		m_debugGUI.Text("Speed:");
-		m_debugGUI.Text("Position:");
-		m_debugGUI.Text("Opacity:");
-		m_debugGUI.End();
+		//m_debugGUI.Begin("Object Properties");
+		//m_debugGUI.Text("Speed:");
+		//m_debugGUI.Text("Position:");
+		//m_debugGUI.Text("Opacity:");
+		//m_debugGUI.End();
 
 		m_debugGUI.Begin("Terminal");
 		m_debugGUI.Text("python3 && print('Hello World!')");
@@ -83,13 +83,89 @@ public:
 };
 
 
+class SquareLayer : public ZGM::Layer {
+private:
+	Render::VertexArray* vertexArray;
+	Render::VertexBuffer* vertexBuffer;
+	Render::BufferLayout* bufferLayout;
+	Render::IndexBuffer* indexBuffer;
+	Render::Shader* shader;
+	Render::Texture* texture;
+
+	Render::Renderer* renderer;
+
+public:
+	SquareLayer(const char* name, bool isOverlay)
+		: ZGM::Layer(name, isOverlay) 
+		{
+			// 1. Vertex Array
+			vertexArray = new Render::VertexArray();
+			// 2. Vertex Buffer
+			float positions[16] =
+			{
+				-0.5f, -0.5f, 0.0f, 0.0f,
+				0.5f,  -0.5f, 1.0f, 0.0f,
+				0.5f,	0.5f, 1.0f, 1.0f,
+				-0.5f,	0.5f, 0.0f, 1.0f
+			};
+			std::cout << positions << std::endl;
+			vertexBuffer = new Render::VertexBuffer(positions, 16);
+			// 3. Buffer Layout + Init
+			bufferLayout = new Render::BufferLayout();
+			bufferLayout->Push(GL_FLOAT, 2, 4);
+			bufferLayout->Push(GL_FLOAT, 2, 4);
+			// 4. Vertex Array Init
+			vertexArray->AddBuffer(*vertexBuffer, *bufferLayout);
+			// 5. Index Buffer
+			unsigned int indecis[6]
+			{
+				0,1,2,
+				0,3,2
+			};
+			indexBuffer = new Render::IndexBuffer(indecis, 6);
+			// 6. Shader + Init
+			shader = new Render::Shader();
+			shader->AddVertexShader("res/shader/VertexShader.shader");
+			shader->AddFragmentShader("res/shader/FragmentShader.shader");
+			shader->LinkAndValidate();
+
+			// 7. Texture
+			texture = new Render::Texture("res/textures/brick.png");
+
+			// 8. Bind
+			shader->BindShader();
+			vertexArray->BindVertexArray();
+			vertexBuffer->Bind();
+			indexBuffer->Bind();
+
+			// 9. Texture Setup
+			texture->Bind(0);
+			shader->SetUniform1i("u_texture", 0);
+
+			renderer = new Render::OGLRenderer();
+		}
+
+	void OnRender() override {
+
+		renderer->DrawElements();
+	}
+
+	~SquareLayer() {
+		delete vertexBuffer;
+	}
+
+
+};
+
 class Sandbox : public ZGM::Application {
 public:
 	Sandbox() {
 		DebugLayer* dl = new DebugLayer("ImGUI Debug", true, m_windowObj->GetWindow());
 		InputPollingLayer* ipl = new InputPollingLayer("Input Polling", "true", m_windowObj->GetWindow());
+		SquareLayer* sl = new SquareLayer("Square", false);
 		m_layerStack.InsertLayer(dl);
 		m_layerStack.InsertLayer(ipl);
+		m_layerStack.InsertLayer(sl);
 	};
 
 	~Sandbox() {

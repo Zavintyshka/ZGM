@@ -1,6 +1,6 @@
 #pragma once
 #include "ZGM/Core.h"
-#include "Graphics/OGL_API/General.h"
+#include <Glfw/glfw3.h>
 
 struct MousePosition {
 	float xPos, yPos;

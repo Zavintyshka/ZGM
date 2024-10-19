@@ -1,10 +1,10 @@
 #pragma once
 
 #include "ZGM/Core.h"
-#include "general.h"
+#include "OGLCore.h"
+#include "ZGM/Logger.h"
 
 #include "Events/EventMouse.h"
-
 
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_glfw.h"

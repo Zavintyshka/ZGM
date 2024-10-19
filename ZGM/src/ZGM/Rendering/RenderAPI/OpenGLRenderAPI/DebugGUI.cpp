@@ -1,5 +1,4 @@
 #include "zgmpch.h"
-#include "ZGM/Logger.h"
 #include "DebugGUI.h"
 
 
@@ -10,19 +9,19 @@ DebugGUI::DebugGUI(GLFWwindow* window, const char* OpenGLVersion, float scale)
     bool isGUI_OpenGL3_Init = ImGui_ImplOpenGL3_Init(OpenGLVersion);
     ImGui::StyleColorsDark();
     ImGui::GetIO().FontGlobalScale = scale;
-
+  
     if (isGUI_GLFW_Init)
-        print("ImGui GLFW successfully loaded");
+        ZGM_CORE_INFO("ImGui GLFW successfully loaded");
     else {
-        print("ImGui GLFW not loaded");
+        ZGM_CORE_INFO("ImGui GLFW not loaded");
         exit(1);
     }
         
 
     if (isGUI_GLFW_Init)
-        print("ImGui OpenGL3 successfully loaded");
+        ZGM_CORE_INFO("ImGui OpenGL3 successfully loaded");
     else {
-        print("ImGui OpenGL3 not loaded");
+        ZGM_CORE_INFO("ImGui OpenGL3 not loaded");
         exit(1);
     }   
 }
@@ -32,7 +31,7 @@ DebugGUI::~DebugGUI()
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
-    print("GUI Destructed");
+    ZGM_CORE_INFO("GUI Destructed");
 }
 
 void DebugGUI::NewFrame()

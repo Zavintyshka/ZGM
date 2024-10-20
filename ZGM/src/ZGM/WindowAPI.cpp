@@ -51,8 +51,10 @@ ZGM::Window::Window(WindowProperties winProps, OpenGLProperties oglProps)
     
 
     ZGM_ASSERT(gladLoadGLLoader((GLADloadproc)glfwGetProcAddress), "GLAD has successfully found pointers to OpenGL functions", "GLAD initialization failed");
+    std::string GPU_NAME = reinterpret_cast<const char*>(glGetString(GL_RENDERER));
+    ZGM_CORE_INFO("GPU: {0}", GPU_NAME);
     std::string OGL_VERSION = reinterpret_cast<const char*>(glGetString(GL_VERSION));
-    ZGM_CORE_INFO("{0} {1}", "Driver:", OGL_VERSION);
+    ZGM_CORE_INFO("Driver: {0}", OGL_VERSION);
     ZGM_DEBUG_PRINT("--------------------------------------------------------------------------------------------");
 
     // GLFW Callbacks

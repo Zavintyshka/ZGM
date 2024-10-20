@@ -4,6 +4,10 @@
 namespace Render {
     std::string Shader::GetShaderSourceCode(const std::string& filepath)
     {
+#ifdef _DEBUG
+        IsFileExists(filepath.c_str());
+#endif
+
         std::ifstream stream(filepath);
         std::string shaderType;
         std::string line;
@@ -11,8 +15,8 @@ namespace Render {
 
         while (std::getline(stream, line)) {
             if (line.find("#shader") != std::string::npos) {
-                shaderType = line.find("vertex") != std::string::npos ? "Vertex Shader" : "Fragment Shader";
-                std::cout << "Load " << shaderType << std::endl;
+                shaderType = line.find("vertex") != std::string::npos ? "Vertex" : "Fragment";
+                ZGM_CORE_INFO("Load {0} Shader", shaderType);
             }
             else {
                 shaderSource += line + "\n";
@@ -33,7 +37,7 @@ namespace Render {
 
         int shaderType;
         glGetShaderiv(shaderID, GL_SHADER_TYPE, &shaderType);
-        const char* shaderTypeStr = shaderType == GL_VERTEX_SHADER ? "Vertex Shader" : "Fragment Shader";
+        const char* shaderTypeStr = shaderType == GL_VERTEX_SHADER ? "Vertex" : "Fragment";
 
         if (compilationStatus != GL_TRUE) {
             // Log Message
@@ -49,10 +53,11 @@ namespace Render {
 
             // Delete failed shader
             glDeleteShader(shaderID);
+            exit(1);
             return 0;
         }
         else {
-            std::cout << shaderTypeStr << " successfully compiled\n";
+            ZGM_CORE_INFO("{0} Shader successfully compiled", shaderTypeStr);
         }
         return shaderID;
     }

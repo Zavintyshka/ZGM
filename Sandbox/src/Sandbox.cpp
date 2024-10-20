@@ -108,7 +108,7 @@ public:
 				0.5f,	0.5f, 1.0f, 1.0f,
 				-0.5f,	0.5f, 0.0f, 1.0f
 			};
-			std::cout << positions << std::endl;
+
 			vertexBuffer = new Render::VertexBuffer(positions, 16);
 			// 3. Buffer Layout + Init
 			bufferLayout = new Render::BufferLayout();

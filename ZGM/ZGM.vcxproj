@@ -15,6 +15,8 @@
     <ClInclude Include="include\GLAD\khrplatform.h" />
     <ClInclude Include="src\Events\Event.h" />
     <ClInclude Include="src\Events\EventMouse.h" />
+    <ClInclude Include="src\Tools\Exception.h" />
+    <ClInclude Include="src\Tools\GeneralTools.h" />
     <ClInclude Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\BufferLayout.h" />
     <ClInclude Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\IndexBuffer.h" />
     <ClInclude Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\Shader.h" />
@@ -197,6 +199,8 @@
     <ClCompile Include="src\Events\EventKeyboard.h" />
     <ClCompile Include="src\Events\EventWindow.h" />
     <ClCompile Include="src\glad.cpp" />
+    <ClCompile Include="src\Tools\Exception.cpp" />
+    <ClCompile Include="src\Tools\GeneralTools.cpp" />
     <ClCompile Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\BufferLayout.cpp" />
     <ClCompile Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\IndexBuffer.cpp" />
     <ClCompile Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\OGLCore.cpp" />
@@ -386,6 +390,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)ZGM\vendor\spdlog\include;$(SolutionDir)ZGM\src;$(SolutionDir)ZGM\include;$(SolutionDir)ZGM\src\Graphics\OGL_API\;$(SolutionDir)ZGM\vendor\;</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>zgmpch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

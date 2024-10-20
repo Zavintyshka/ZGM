@@ -6,6 +6,10 @@ namespace Render {
 	Texture::Texture(const std::string& filepath)
 		: m_filepath(filepath), m_localBuffer(nullptr), m_width(0), m_height(0), m_BPP(0)
 	{
+#ifdef _DEBUG
+		IsFileExists(filepath.c_str());
+#endif
+
 		stbi_set_flip_vertically_on_load(1);
 		m_localBuffer = stbi_load(m_filepath.c_str(), &m_width, &m_height, &m_BPP, 4);
 		glGenTextures(1, &m_objectID);

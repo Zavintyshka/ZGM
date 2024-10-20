@@ -9,7 +9,7 @@ DebugGUI::DebugGUI(GLFWwindow* window, const char* OpenGLVersion, float scale)
     bool isGUI_OpenGL3_Init = ImGui_ImplOpenGL3_Init(OpenGLVersion);
     ImGui::StyleColorsDark();
     ImGui::GetIO().FontGlobalScale = scale;
-  
+    std::cout << "------------------------------------------ ImGui ------------------------------------------\n";
     if (isGUI_GLFW_Init)
         ZGM_CORE_INFO("ImGui GLFW successfully loaded");
     else {
@@ -17,13 +17,13 @@ DebugGUI::DebugGUI(GLFWwindow* window, const char* OpenGLVersion, float scale)
         exit(1);
     }
         
-
     if (isGUI_GLFW_Init)
         ZGM_CORE_INFO("ImGui OpenGL3 successfully loaded");
     else {
         ZGM_CORE_INFO("ImGui OpenGL3 not loaded");
         exit(1);
-    }   
+    }
+    std::cout << "-------------------------------------------------------------------------------------------\n";
 }
 
 DebugGUI::~DebugGUI()

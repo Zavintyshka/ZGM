@@ -23,6 +23,7 @@
     <ClInclude Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\Texture.h" />
     <ClInclude Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\VertexArray.h" />
     <ClInclude Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\VertexBuffer.h" />
+    <ClInclude Include="src\ZGM\Rendering\Shader.h" />
     <ClInclude Include="src\ZGM\WindowAPI.h" />
     <ClInclude Include="src\zgmpch.h" />
     <ClInclude Include="src\ZGM\Input.h" />

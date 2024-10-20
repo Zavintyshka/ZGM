@@ -12,6 +12,10 @@ public:
 	};
 	~DebugLayer() override {};
 
+	void OnEvent(ZGM::Event& event) override {
+
+	}
+
 	//void OnEvent(ZGM::Event& event) override {
 	//	ZGM::DispatchEvent dispatcher(event);
 	//	dispatcher.Dispatch<ZGM::MouseMovedEvent>([this](ZGM::MouseMovedEvent& event) {
@@ -124,16 +128,14 @@ public:
 			};
 			indexBuffer = new Render::IndexBuffer(indecis, 6);
 			// 6. Shader + Init
-			shader = new Render::Shader();
-			shader->AddVertexShader("res/shader/VertexShader.shader");
-			shader->AddFragmentShader("res/shader/FragmentShader.shader");
-			shader->LinkAndValidate();
+			shader = (new Render::OGLShader("res/shader/VertexShader.shader", "res/shader/FragmentShader.shader"));
+			shader->Link();
 
 			// 7. Texture
 			texture = new Render::Texture("res/textures/brick.png");
 
 			// 8. Bind
-			shader->BindShader();
+			shader->Bind();
 			vertexArray->BindVertexArray();
 			vertexBuffer->Bind();
 			indexBuffer->Bind();
@@ -148,6 +150,10 @@ public:
 	void OnRender() override {
 
 		renderer->DrawElements();
+	}
+
+	void OnEvent(ZGM::Event& event) override {
+
 	}
 
 	~SquareLayer() {

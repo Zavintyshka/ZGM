@@ -2,7 +2,7 @@
 #include "Shader.h"
  
 namespace Render {
-    std::string Shader::GetShaderSourceCode(const std::string& filepath)
+    std::string OGLShader::GetShaderSourceCode(const std::string& filepath)
     {
 #ifdef _DEBUG
         IsFileExists(filepath.c_str());
@@ -25,7 +25,7 @@ namespace Render {
         return shaderSource;
     }
 
-    unsigned int Shader::CompileShader(unsigned int type, const char* source)
+    unsigned int OGLShader::CompileShader(unsigned int type, const char* source)
     {
         unsigned int shaderID = glCreateShader(type);
         glShaderSource(shaderID, 1, &source, nullptr);
@@ -47,13 +47,14 @@ namespace Render {
             glGetShaderInfoLog(shaderID, logLength, &logLength, logMessage);
 
             // Print
-            std::cout << "Failed to compile Shader:\n";
-            std::cout << "Shader Type: " << shaderTypeStr << std::endl;
-            std::cout << logMessage << std::endl;
+            std::cout << "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Shader Compile Error ~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
+            ZGM_CORE_ERROR("Failed to compile {0} Shader", shaderTypeStr);
+            ZGM_CORE_ERROR(logMessage);
+            std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
 
             // Delete failed shader
             glDeleteShader(shaderID);
-            exit(1);
+            exit(EXIT_FAILURE);
             return 0;
         }
         else {
@@ -62,30 +63,35 @@ namespace Render {
         return shaderID;
     }
 
-    Shader::Shader()
+    OGLShader::OGLShader(std::string vertexShaderFilepath, std::string fragmentShaderFilepath)
     {
+        ZGM_DEBUG_PRINT("------------------------------------------ Shader Compilation ------------------------------------------");
         m_objectID = glCreateProgram();
+        AddVertexShader(vertexShaderFilepath);
+        AddFragmentShader(fragmentShaderFilepath);
+        ZGM_DEBUG_PRINT("--------------------------------------------------------------------------------------------------------");
     }
 
-    Shader::~Shader()
+    OGLShader::~OGLShader()
     {
+        glDeleteProgram(m_objectID);
     }
 
-    void Shader::AddVertexShader(const std::string& filepath)
+    void OGLShader::AddVertexShader(const std::string& filepath)
     {
         std::string vertexShaderSourceCode = GetShaderSourceCode(filepath);
         m_vertexShaderID = CompileShader(GL_VERTEX_SHADER, vertexShaderSourceCode.c_str());
         glAttachShader(m_objectID, m_vertexShaderID);
     }
 
-    void Shader::AddFragmentShader(const std::string& filepath)
+    void OGLShader::AddFragmentShader(const std::string& filepath)
     {
         std::string fragmentShaderSourceCode = GetShaderSourceCode(filepath);
         m_fragmentShaderID = CompileShader(GL_FRAGMENT_SHADER, fragmentShaderSourceCode.c_str());
         glAttachShader(m_objectID, m_fragmentShaderID);
     }
 
-    void Shader::LinkAndValidate() const
+    void OGLShader::Link() const
     {
         glLinkProgram(m_objectID);
         glValidateProgram(m_objectID);
@@ -96,17 +102,17 @@ namespace Render {
 
 
 
-    void Shader::BindShader() const
+    void OGLShader::Bind() const
     {
         glUseProgram(m_objectID);
     }
 
-    void Shader::UnbindShader() const
+    void OGLShader::Unbind() const
     {
         glUseProgram(0);
     }
 
-    unsigned int  Shader::GetUniformLocation(const std::string& varName)
+    unsigned int  OGLShader::GetUniformLocation(const std::string& varName)
     {
         if (m_locationCache.find(varName) == m_locationCache.end()) {
             m_locationCache[varName] = glGetUniformLocation(m_objectID, varName.c_str());
@@ -114,19 +120,19 @@ namespace Render {
         return  m_locationCache[varName];
     }
 
-    void Shader::SetUniform(const std::string& varName, Vector4& vec4)
+    void OGLShader::SetUniform(const std::string& varName, Vector4& vec4)
     {
 
         glUniform4f(GetUniformLocation(varName), vec4.x, vec4.y, vec4.z, vec4.w);
 
     }
 
-    void Shader::SetUniform1i(const std::string& varName, int value)
+    void OGLShader::SetUniform1i(const std::string& varName, int value)
     {
         glUniform1f(GetUniformLocation(varName), value);
     }
 
-    void Shader::SetUniformMat4f(const std::string& varName, glm::mat4& projMatrix)
+    void OGLShader::SetUniformMat4f(const std::string& varName, glm::mat4& projMatrix)
     {
         glUniformMatrix4fv(GetUniformLocation(varName), 1, GL_FALSE, &projMatrix[0][0]);
     }

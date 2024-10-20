@@ -564,6 +564,9 @@
     <ClInclude Include="src\Tools\GeneralTools.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\ZGM\Rendering\Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ZGM\Application.cpp">

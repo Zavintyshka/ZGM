@@ -91,10 +91,10 @@ class SquareLayer : public ZGM::Layer {
 private:
 	Render::VertexArray* vertexArray;
 	Render::BufferLayout* bufferLayout;
-	Render::IndexBuffer* indexBuffer;
 	Render::Texture* texture;
 
 	// Renderer
+	Render::IndexBuffer* indexBuffer;
 	Render::VertexBuffer* vertexBuffer;
 	Render::Shader* shader;
 	Render::Renderer* renderer;
@@ -130,7 +130,7 @@ public:
 				0,1,2,
 				0,3,2
 			};
-			indexBuffer = new Render::IndexBuffer(indecis, 6);
+			indexBuffer = new Render::OGLIndexBuffer(indecis, 6);
 			// 6. Shader + Init
 			shader = (new Render::OGLShader("res/shader/VertexShader.shader", "res/shader/FragmentShader.shader"));
 			shader->Link();

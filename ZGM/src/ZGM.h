@@ -8,14 +8,14 @@
 
 #include "ZGM/WindowAPI.h"
 
-// Render
+// Renderer OGL
 #include "ZGM/Rendering/RenderAPI/OpenGLRenderAPI/DebugGUI.h"
 #include "ZGM/Rendering/RenderAPI/OpenGLRenderer.h"
 
 #include "ZGM/Rendering/RenderAPI/OpenGLRenderAPI/VertexArray.h"
 #include "ZGM/Rendering/RenderAPI/OpenGLRenderAPI/OGLVertexBuffer.h"
 #include "ZGM/Rendering/RenderAPI/OpenGLRenderAPI/BufferLayout.h"
-#include "ZGM/Rendering/RenderAPI/OpenGLRenderAPI/IndexBuffer.h"
+#include "ZGM/Rendering/RenderAPI/OpenGLRenderAPI/OGLIndexBuffer.h"
 #include "ZGM/Rendering/RenderAPI/OpenGLRenderAPI/OGLShader.h"
 #include "ZGM/Rendering/RenderAPI/OpenGLRenderAPI/Texture.h"
 

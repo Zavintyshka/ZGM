@@ -1,5 +1,5 @@
 #include "zgmpch.h"
-#include "Shader.h"
+#include "OGLShader.h"
  
 namespace Render {
     std::string OGLShader::GetShaderSourceCode(const std::string& filepath)

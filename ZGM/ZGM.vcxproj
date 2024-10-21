@@ -17,12 +17,13 @@
     <ClInclude Include="src\Events\EventMouse.h" />
     <ClInclude Include="src\Tools\Exception.h" />
     <ClInclude Include="src\Tools\GeneralTools.h" />
+    <ClInclude Include="src\ZGM\Rendering\VertexBuffer.h" />
     <ClInclude Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\BufferLayout.h" />
     <ClInclude Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\IndexBuffer.h" />
-    <ClInclude Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\Shader.h" />
+    <ClInclude Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\OGLShader.h" />
     <ClInclude Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\Texture.h" />
     <ClInclude Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\VertexArray.h" />
-    <ClInclude Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\VertexBuffer.h" />
+    <ClInclude Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\OGLVertexBuffer.h" />
     <ClInclude Include="src\ZGM\Rendering\Shader.h" />
     <ClInclude Include="src\ZGM\WindowAPI.h" />
     <ClInclude Include="src\zgmpch.h" />
@@ -205,11 +206,12 @@
     <ClCompile Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\BufferLayout.cpp" />
     <ClCompile Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\IndexBuffer.cpp" />
     <ClCompile Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\OGLCore.cpp" />
-    <ClCompile Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\Shader.cpp" />
+    <ClCompile Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\OGLShader.cpp" />
     <ClCompile Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\Texture.cpp" />
     <ClCompile Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\VertexArray.cpp" />
-    <ClCompile Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\VertexBuffer.cpp" />
+    <ClCompile Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\OGLVertexBuffer.cpp" />
     <ClCompile Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderer.cpp" />
+    <ClCompile Include="src\ZGM\Rendering\VertexBuffer.cpp" />
     <ClCompile Include="src\ZGM\WindowAPI.cpp" />
     <ClCompile Include="src\zgmpch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

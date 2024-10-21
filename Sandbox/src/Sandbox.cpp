@@ -90,12 +90,13 @@ public:
 class SquareLayer : public ZGM::Layer {
 private:
 	Render::VertexArray* vertexArray;
-	Render::VertexBuffer* vertexBuffer;
 	Render::BufferLayout* bufferLayout;
 	Render::IndexBuffer* indexBuffer;
-	Render::Shader* shader;
 	Render::Texture* texture;
 
+	// Renderer
+	Render::VertexBuffer* vertexBuffer;
+	Render::Shader* shader;
 	Render::Renderer* renderer;
 
 public:
@@ -104,22 +105,25 @@ public:
 		{
 			// 1. Vertex Array
 			vertexArray = new Render::VertexArray();
+
 			// 2. Vertex Buffer
-			float positions[16] =
-			{
-				-0.5f, -0.5f, 0.0f, 0.0f,
-				0.5f,  -0.5f, 1.0f, 0.0f,
-				0.5f,	0.5f, 1.0f, 1.0f,
-				-0.5f,	0.5f, 0.0f, 1.0f
+			using Vertex = Render::Vertex;
+
+			const Vertex vertices[4] = {
+				{-0.5f, -0.5f, 0.0f, 1.0f,		0.0f, 0.0f},
+				{0.5f,	-0.5f, 0.0f, 1.0f,		1.0f, 0.0f},
+				{0.5f,	 0.5f, 0.0f, 1.0f,		1.0f, 1.0f},
+				{-0.5f,  0.5f, 0.0f, 1.0f,		0.0f, 1.0f}
 			};
 
-			vertexBuffer = new Render::VertexBuffer(positions, 16);
+			vertexBuffer = new Render::OGLVertexBuffer(vertices, 4);
 			// 3. Buffer Layout + Init
+
 			bufferLayout = new Render::BufferLayout();
-			bufferLayout->Push(GL_FLOAT, 2, 4);
-			bufferLayout->Push(GL_FLOAT, 2, 4);
+			bufferLayout->Push(GL_FLOAT, 4, 6);
+			bufferLayout->Push(GL_FLOAT, 2, 6);
 			// 4. Vertex Array Init
-			vertexArray->AddBuffer(*vertexBuffer, *bufferLayout);
+			vertexArray->AddBuffer(*(Render::OGLVertexBuffer*)vertexBuffer, *bufferLayout);
 			// 5. Index Buffer
 			unsigned int indecis[6]
 			{
@@ -132,7 +136,7 @@ public:
 			shader->Link();
 
 			// 7. Texture
-			texture = new Render::Texture("res/textures/brick.png");
+			texture = new Render::Texture("res/textures/ender.png");
 
 			// 8. Bind
 			shader->Bind();

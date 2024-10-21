@@ -21,6 +21,7 @@ namespace ZGM {
 	{
 		GLFWwindow* winPtr = m_windowObj->GetWindow();
 		while (m_running) {
+			// TODO: Abstaction
 			glClearColor(0.0f, 0.271f, 0.141f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
 
@@ -36,6 +37,8 @@ namespace ZGM {
 
 			m_windowObj->OnUpdate();
 		}
+
+		// API Terminate
 	}
 	void Application::OnEvent(Event& event)
 	{

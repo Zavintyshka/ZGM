@@ -13,10 +13,10 @@
 #include "ZGM/Rendering/RenderAPI/OpenGLRenderer.h"
 
 #include "ZGM/Rendering/RenderAPI/OpenGLRenderAPI/VertexArray.h"
-#include "ZGM/Rendering/RenderAPI/OpenGLRenderAPI/VertexBuffer.h"
+#include "ZGM/Rendering/RenderAPI/OpenGLRenderAPI/OGLVertexBuffer.h"
 #include "ZGM/Rendering/RenderAPI/OpenGLRenderAPI/BufferLayout.h"
 #include "ZGM/Rendering/RenderAPI/OpenGLRenderAPI/IndexBuffer.h"
-#include "ZGM/Rendering/RenderAPI/OpenGLRenderAPI/Shader.h"
+#include "ZGM/Rendering/RenderAPI/OpenGLRenderAPI/OGLShader.h"
 #include "ZGM/Rendering/RenderAPI/OpenGLRenderAPI/Texture.h"
 
 #include "ZGM/EntryPoint.h"

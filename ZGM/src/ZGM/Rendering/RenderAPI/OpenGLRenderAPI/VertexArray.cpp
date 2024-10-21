@@ -22,7 +22,7 @@ namespace Render {
         GLCall(glBindVertexArray(0));
     }
 
-    void VertexArray::AddBuffer(const VertexBuffer& vertexBuffer, const BufferLayout& bufferLayout) const {
+    void VertexArray::AddBuffer(const OGLVertexBuffer& vertexBuffer, const BufferLayout& bufferLayout) const {
         BindVertexArray();
         // Vertex Buffer
         vertexBuffer.Bind();

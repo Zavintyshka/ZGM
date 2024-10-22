@@ -546,7 +546,7 @@
     <ClInclude Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\OGLVertexBufferLayout.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\VertexArray.h">
+    <ClInclude Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\OGLVertexArray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\OGLIndexBuffer.h">
@@ -574,6 +574,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\ZGM\Rendering\VertexBufferLayout.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ZGM\Rendering\VertexArray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -647,7 +650,7 @@
     <ClCompile Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\OGLVertexBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\VertexArray.cpp">
+    <ClCompile Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\OGLVertexArray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\OGLIndexBuffer.cpp">

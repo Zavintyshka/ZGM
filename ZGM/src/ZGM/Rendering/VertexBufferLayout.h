@@ -10,7 +10,7 @@ namespace Render {
 		unsigned int strideComponentCount;
 	};
 
-	class VertexBufferLayout {
+	class ZGM_API VertexBufferLayout {
 	protected:
 		std::vector<LayoutElement> vertexBufferLayout;
 	public:

@@ -12,7 +12,7 @@
 #include "ZGM/Rendering/RenderAPI/OpenGLRenderAPI/DebugGUI.h"
 #include "ZGM/Rendering/RenderAPI/OpenGLRenderer.h"
 
-#include "ZGM/Rendering/RenderAPI/OpenGLRenderAPI/VertexArray.h"
+#include "ZGM/Rendering/RenderAPI/OpenGLRenderAPI/OGLVertexArray.h"
 #include "ZGM/Rendering/RenderAPI/OpenGLRenderAPI/OGLVertexBuffer.h"
 #include "ZGM/Rendering/RenderAPI/OpenGLRenderAPI/OGLVertexBufferLayout.h"
 #include "ZGM/Rendering/RenderAPI/OpenGLRenderAPI/OGLIndexBuffer.h"

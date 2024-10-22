@@ -1,34 +1,34 @@
 #include "zgmpch.h"
-#include "VertexArray.h"
+#include "OGLVertexArray.h"
 
 namespace Render {
-    VertexArray::VertexArray()
+    OGLVertexArray::OGLVertexArray()
     {
-        GLCall(glGenVertexArrays(1, &m_objectID));
+        GLCall(glGenVertexArrays(1, &m_vertexArrayID));
     }
 
-    VertexArray::~VertexArray()
+    OGLVertexArray::~OGLVertexArray()
     {
-        GLCall(glDeleteVertexArrays(1, &m_objectID));
+        GLCall(glDeleteVertexArrays(1, &m_vertexArrayID));
     }
 
-    void VertexArray::BindVertexArray() const
+    void OGLVertexArray::Bind() const
     {
-        GLCall(glBindVertexArray(m_objectID));
+        GLCall(glBindVertexArray(m_vertexArrayID));
     }
 
-    void VertexArray::UnbindVertexArray() const
+    void OGLVertexArray::Unbind() const
     {
         GLCall(glBindVertexArray(0));
     }
 
-    void VertexArray::AddBuffer(const OGLVertexBuffer& vertexBuffer, const OGLVertexBufferLayout& bufferLayout) const {
-        BindVertexArray();
+    void OGLVertexArray::AddBuffer(const VertexBuffer& vertexBuffer, const VertexBufferLayout& vertexBufferLayout) const {
+        Bind();
         // Vertex Buffer
         vertexBuffer.Bind();
         vertexBuffer.Init();
         // Buffer Layout
-        auto elements = *bufferLayout.GetLayout();
+        auto elements = *vertexBufferLayout.GetLayout();
         unsigned int offset = 0;
 
         for (int i = 0; i < elements.size(); i++) {

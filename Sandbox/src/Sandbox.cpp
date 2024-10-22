@@ -89,11 +89,10 @@ public:
 
 class SquareLayer : public ZGM::Layer {
 private:
-	Render::VertexArray* vertexArray;
-
 	Render::Texture* texture;
 
 	// Renderer
+	Render::VertexArray* vertexArray;
 	Render::VertexBufferLayout* bufferLayout;
 	Render::IndexBuffer* indexBuffer;
 	Render::VertexBuffer* vertexBuffer;
@@ -105,7 +104,7 @@ public:
 		: ZGM::Layer(name, isOverlay) 
 		{
 			// 1. Vertex Array
-			vertexArray = new Render::VertexArray();
+			vertexArray = new Render::OGLVertexArray();
 
 			// 2. Vertex Buffer
 			using Vertex = Render::Vertex;
@@ -124,7 +123,7 @@ public:
 			bufferLayout->Push(GL_FLOAT, 4, true, 6);
 			bufferLayout->Push(GL_FLOAT, 2, true, 6);
 			// 4. Vertex Array Init
-			vertexArray->AddBuffer(*(Render::OGLVertexBuffer*)vertexBuffer, *(Render::OGLVertexBufferLayout*)bufferLayout);
+			vertexArray->AddBuffer(*vertexBuffer, *bufferLayout);
 			// 5. Index Buffer
 			unsigned int indecis[6]
 			{
@@ -141,7 +140,7 @@ public:
 
 			// 8. Bind
 			shader->Bind();
-			vertexArray->BindVertexArray();
+			vertexArray->Bind();
 			vertexBuffer->Bind();
 			indexBuffer->Bind();
 

@@ -9,6 +9,7 @@ namespace ZGM {
 	Application::Application()
 		: m_windowObj(std::make_unique<Window>())
 	{
+		m_renderCommand = Render::RendererFabric::CreateRenderCommand();
 		m_windowObj->SetEventCallbackFN(BIND_EVENT_CALLBACK(Application::OnEvent));
 		m_inputPolling = new Input(m_windowObj->GetWindow());
 	}
@@ -20,10 +21,11 @@ namespace ZGM {
 	void Application::Run()
 	{
 		GLFWwindow* winPtr = m_windowObj->GetWindow();
+		glm::vec4 clearColor(0.0f, 0.271f, 0.141f, 1.0f);
+
 		while (m_running) {
-			// TODO: Abstaction
-			glClearColor(0.0f, 0.271f, 0.141f, 1.0f);
-			glClear(GL_COLOR_BUFFER_BIT);
+			m_renderCommand->SetClearColor(clearColor);
+			m_renderCommand->Clear();
 
 			// Layer OnUpdate
 			for (auto it = m_layerStack.Begin(); it != m_layerStack.End(); it++) {

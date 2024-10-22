@@ -104,7 +104,7 @@ public:
 		: ZGM::Layer(name, isOverlay) 
 		{
 			// 1. Vertex Array
-			vertexArray = new Render::OGLVertexArray();
+			vertexArray = Render::GeometryFabric::CreateVertexArray();
 
 			// 2. Vertex Buffer
 			using Vertex = Render::Vertex;
@@ -116,10 +116,11 @@ public:
 				{-0.5f,  0.5f, 0.0f, 1.0f,		0.0f, 1.0f}
 			};
 
-			vertexBuffer = new Render::OGLVertexBuffer(vertices, 4);
+		
+			vertexBuffer = Render::GeometryFabric::CreateVertexBuffer(vertices, 4);
 			// 3. Buffer Layout + Init
 
-			bufferLayout = new Render::OGLVertexBufferLayout();
+			bufferLayout = Render::GeometryFabric::CreateVertexBufferLayout();
 			bufferLayout->Push(GL_FLOAT, 4, true, 6);
 			bufferLayout->Push(GL_FLOAT, 2, true, 6);
 			// 4. Vertex Array Init
@@ -130,9 +131,9 @@ public:
 				0,1,2,
 				0,3,2
 			};
-			indexBuffer = new Render::OGLIndexBuffer(indecis, 6);
+			indexBuffer = Render::GeometryFabric::CreateIndexBuffer(indecis, 6);
 			// 6. Shader + Init
-			shader = (new Render::OGLShader("res/shader/VertexShader.shader", "res/shader/FragmentShader.shader"));
+			shader = Render::ShaderFabric::CreateShader("res/shader/VertexShader.shader", "res/shader/FragmentShader.shader");
 			shader->Link();
 
 			// 7. Texture
@@ -152,8 +153,11 @@ public:
 		}
 
 	void OnRender() override {
-
-		renderer->DrawElements();
+		renderer->BeginScene();
+		shader->Bind();
+		vertexArray->Bind();
+		renderer->Submit();
+		renderer->EndScene();
 	}
 
 	void OnEvent(ZGM::Event& event) override {

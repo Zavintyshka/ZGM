@@ -18,6 +18,7 @@
     <ClInclude Include="src\Tools\Exception.h" />
     <ClInclude Include="src\Tools\GeneralTools.h" />
     <ClInclude Include="src\ZGM\Rendering\IndexBuffer.h" />
+    <ClInclude Include="src\ZGM\Rendering\RendererFabric.h" />
     <ClInclude Include="src\ZGM\Rendering\VertexArray.h" />
     <ClInclude Include="src\ZGM\Rendering\VertexBuffer.h" />
     <ClInclude Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\OGLVertexBufferLayout.h" />
@@ -391,7 +392,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>USE_GLFW;ZGM_PLATFORM_WINDOWS;ZGM_BUILD_DLL;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);ZGM_PLATFORM_WINDOWS;ZGM_API;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>OPENGL_API;USE_GLFW;ZGM_PLATFORM_WINDOWS;ZGM_BUILD_DLL;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);ZGM_PLATFORM_WINDOWS;ZGM_API;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)ZGM\vendor\spdlog\include;$(SolutionDir)ZGM\src;$(SolutionDir)ZGM\include;$(SolutionDir)ZGM\src\Graphics\OGL_API\;$(SolutionDir)ZGM\vendor\;</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>

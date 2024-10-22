@@ -11,7 +11,6 @@
 
 
 
-
 struct WindowProperties {
 	const char* title;
 	unsigned int width, height;

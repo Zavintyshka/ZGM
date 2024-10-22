@@ -2,13 +2,15 @@
 #include "WindowAPI.h"
 
 // ---Graphical API---
-#define OPENGL_GRAPHICAL_API 1;
+
 /*
-#define DIRECTX12_GRAPHICAL_API 1;
-#define DIRECTX11_GRAPHICAL_API 1;
-#define VULCAN_GRAPHICAL_API 1;
-#define METAL_GRAPHICAL_API 1;
+#define OPENGL_API 1;
+#define DIRECTX12_API 1;
+#define DIRECTX11_API 1;
+#define VULCAN_API 1;
+#define METAL_API 1;
 */
+
 // ---Graphical API---
 
 
@@ -41,7 +43,7 @@ ZGM::Window::Window(WindowProperties winProps, OpenGLProperties oglProps)
     ZGM_CORE_INFO("Resolution: ({0},{1})", m_winProps.width, m_winProps.height);
 
     // --Context--
-#ifdef OPENGL_GRAPHICAL_API
+#ifdef OPENGL_API
     m_context = new OpenGLContext(m_window);
 #endif
    

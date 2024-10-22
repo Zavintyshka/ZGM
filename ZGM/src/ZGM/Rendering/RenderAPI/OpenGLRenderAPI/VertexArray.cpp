@@ -22,22 +22,22 @@ namespace Render {
         GLCall(glBindVertexArray(0));
     }
 
-    void VertexArray::AddBuffer(const OGLVertexBuffer& vertexBuffer, const BufferLayout& bufferLayout) const {
+    void VertexArray::AddBuffer(const OGLVertexBuffer& vertexBuffer, const OGLVertexBufferLayout& bufferLayout) const {
         BindVertexArray();
         // Vertex Buffer
         vertexBuffer.Bind();
         vertexBuffer.Init();
         // Buffer Layout
-        auto elements = *bufferLayout.GetElements();
+        auto elements = *bufferLayout.GetLayout();
         unsigned int offset = 0;
 
         for (int i = 0; i < elements.size(); i++) {
             auto element = elements[i];
-            unsigned int stride = element.strideCount * sizeof(element.type);
+            unsigned int stride = element.strideComponentCount * sizeof(element.componentType);
 
             GLCall(glEnableVertexAttribArray(i));
-            GLCall(glVertexAttribPointer(i, element.count, element.type, element.normalized, stride, (void*)offset));
-            offset += element.count * sizeof(element.type);
+            GLCall(glVertexAttribPointer(i, element.componentCount, element.componentType, element.normalized, stride, (void*)offset));
+            offset += element.componentCount * sizeof(element.componentType);
         }
     }
 }

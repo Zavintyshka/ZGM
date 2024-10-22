@@ -14,7 +14,7 @@
 
 #include "ZGM/Rendering/RenderAPI/OpenGLRenderAPI/VertexArray.h"
 #include "ZGM/Rendering/RenderAPI/OpenGLRenderAPI/OGLVertexBuffer.h"
-#include "ZGM/Rendering/RenderAPI/OpenGLRenderAPI/BufferLayout.h"
+#include "ZGM/Rendering/RenderAPI/OpenGLRenderAPI/OGLVertexBufferLayout.h"
 #include "ZGM/Rendering/RenderAPI/OpenGLRenderAPI/OGLIndexBuffer.h"
 #include "ZGM/Rendering/RenderAPI/OpenGLRenderAPI/OGLShader.h"
 #include "ZGM/Rendering/RenderAPI/OpenGLRenderAPI/Texture.h"

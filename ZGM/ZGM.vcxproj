@@ -19,13 +19,14 @@
     <ClInclude Include="src\Tools\GeneralTools.h" />
     <ClInclude Include="src\ZGM\Rendering\IndexBuffer.h" />
     <ClInclude Include="src\ZGM\Rendering\VertexBuffer.h" />
-    <ClInclude Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\BufferLayout.h" />
+    <ClInclude Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\OGLVertexBufferLayout.h" />
     <ClInclude Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\OGLIndexBuffer.h" />
     <ClInclude Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\OGLShader.h" />
     <ClInclude Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\Texture.h" />
     <ClInclude Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\VertexArray.h" />
     <ClInclude Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\OGLVertexBuffer.h" />
     <ClInclude Include="src\ZGM\Rendering\Shader.h" />
+    <ClInclude Include="src\ZGM\Rendering\VertexBufferLayout.h" />
     <ClInclude Include="src\ZGM\WindowAPI.h" />
     <ClInclude Include="src\zgmpch.h" />
     <ClInclude Include="src\ZGM\Input.h" />
@@ -205,7 +206,6 @@
     <ClCompile Include="src\Tools\Exception.cpp" />
     <ClCompile Include="src\Tools\GeneralTools.cpp" />
     <ClCompile Include="src\ZGM\Rendering\IndexBuffer.cpp" />
-    <ClCompile Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\BufferLayout.cpp" />
     <ClCompile Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\OGLIndexBuffer.cpp" />
     <ClCompile Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\OGLCore.cpp" />
     <ClCompile Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\OGLShader.cpp" />

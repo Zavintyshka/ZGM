@@ -11,7 +11,9 @@ namespace ZGM {
 		public:
 			KeyPressedEvent(int keyCode, bool isRepeated)
 				: m_keyCode(keyCode), m_isRepeated(isRepeated) {}
-		protected:
+
+			inline int GetKeyCode() const { return m_keyCode; };
+
 			std::string ToString() const {
 				std::stringstream message;
 				const char* buttonState = m_isRepeated ? "Holding" : "Single Click";
@@ -29,7 +31,9 @@ namespace ZGM {
 		public:
 			KeyReleasedEvent(int keyCode)
 				: m_keyCode(keyCode) {}
-		protected:
+
+			inline int GetKeyCode() const { return m_keyCode; };
+
 			std::string ToString() const {
 				std::stringstream message;
 				message << "Event: " << GetName() << " Key Code: " << m_keyCode;

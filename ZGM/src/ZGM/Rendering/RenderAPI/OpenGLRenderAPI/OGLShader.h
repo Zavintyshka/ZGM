@@ -49,7 +49,6 @@ namespace Render {
 
 		void SetUniform1i(const std::string& varName, int value) override;
 
-		void SetUniformMat4f(const std::string& varName, glm::mat4& projMatrix);
-
+		void SetUniformMat4f(const std::string& varName, glm::mat4& matrix) override;
 	};
 }

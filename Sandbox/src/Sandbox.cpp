@@ -3,6 +3,9 @@
 class DebugLayer : public ZGM::Layer {
 private:
 	DebugGUI m_debugGUI;
+	Render::Camera& camera = Render::Camera::CreateCamera(1920.0f, 1080.0f);
+	float m_cameraPosX = camera.GetPos().x, m_cameraPosY = camera.GetPos().y;
+
 public:
 	DebugLayer(const char* name, bool isOverlay, GLFWwindow* windowPtr)
 		: Layer(name, isOverlay), m_debugGUI(windowPtr, "#version 460", 1.5)
@@ -11,58 +14,67 @@ public:
 		m_debugGUI.GetIO().ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 	};
 	~DebugLayer() override {};
-
+	
 	void OnEvent(ZGM::Event& event) override {
-
+		ZGM::DispatchEvent dispatcher(event);
+		dispatcher.Dispatch<ZGM::KeyPressedEvent>([this](ZGM::KeyPressedEvent& event) {
+			return this->OnKeyClicked(event);
+			});
 	}
-
-	//void OnEvent(ZGM::Event& event) override {
-	//	ZGM::DispatchEvent dispatcher(event);
-	//	dispatcher.Dispatch<ZGM::MouseMovedEvent>([this](ZGM::MouseMovedEvent& event) {
-	//		return this->m_debugGUI.OnMouseMoved(event);
-	//		});
-
-	//	dispatcher.Dispatch<ZGM::MouseButtonPressedEvent>([this](ZGM::MouseButtonPressedEvent& event) {
-	//		return this->m_debugGUI.OnMousePressed(event);
-	//		});
-
-	//	dispatcher.Dispatch<ZGM::MouseButtonReleasedEvent>([this](ZGM::MouseButtonReleasedEvent& event) {
-	//		return this->m_debugGUI.OnMouseReleased(event);
-	//		});
-
-	//	dispatcher.Dispatch<ZGM::MouseScrolledEvent>([this](ZGM::MouseScrolledEvent& event) {
-	//		return this->m_debugGUI.OnMouseScrolled(event);
-	//		});
-
-	//	ZGM::Layer::OnEvent(event);
-	//};
 
 	void OnUpdate() override {
 		m_debugGUI.NewFrame();
-		
-		//m_debugGUI.MakeViewport();
-		//m_debugGUI.Begin("Explorer");
-		//m_debugGUI.Text("HelloWorld.txt");
-		//m_debugGUI.Text("MyFile.txt");
-		//m_debugGUI.Text("main.cpp");
-		//m_debugGUI.End();
 
-		//m_debugGUI.Begin("Object Properties");
-		//m_debugGUI.Text("Speed:");
-		//m_debugGUI.Text("Position:");
-		//m_debugGUI.Text("Opacity:");
-		//m_debugGUI.End();
+		m_debugGUI.Begin("Camera Propeties");
+		m_debugGUI.Text("Camera Position:");
 
-		m_debugGUI.Begin("Terminal");
-		m_debugGUI.Text("python3 && print('Hello World!')");
+		m_debugGUI.Text(std::to_string(m_cameraPosX).c_str());
+		m_debugGUI.Text(std::to_string(m_cameraPosY).c_str());
+		m_debugGUI.SliderF("CameraPosX", &m_cameraPosX, -400.0f, 400.0f);
+		m_debugGUI.SliderF("CameraPosY", &m_cameraPosY, -400.0f, 400.0f);
 		m_debugGUI.End();
+
+		UpdateCameraData();
 	};
 
 	void OnRender() override {
 		m_debugGUI.Render();
 	}
-};
 
+	bool OnKeyClicked(ZGM::KeyPressedEvent event) {
+		int keyCode = event.GetKeyCode();
+
+		switch (keyCode) {
+			case ZGM_KEY_UP:
+			case ZGM_KEY_W:
+				m_cameraPosY += 20;
+				break;
+
+			case ZGM_KEY_DOWN:
+			case ZGM_KEY_S:
+				m_cameraPosY -= 20;
+				break;
+
+			case ZGM_KEY_LEFT:
+			case ZGM_KEY_A:
+				m_cameraPosX -= 20;
+				break;
+
+			case ZGM_KEY_RIGHT:
+			case ZGM_KEY_D:
+				m_cameraPosX += 20;
+				break;
+		}	
+		UpdateCameraData();
+		event.m_isEventHandled = true;
+		return true;
+	};
+private:
+	void UpdateCameraData() {
+		glm::vec2 newCameraPos = glm::vec2(m_cameraPosX, m_cameraPosY);
+		camera.SetPos(newCameraPos);
+	}
+};
 
 class InputPollingLayer: public ZGM::Layer {
 private:
@@ -99,9 +111,15 @@ private:
 	Render::Shader* shader;
 	Render::Renderer* renderer;
 
+	// Camera
+	Render::Camera& camera = Render::Camera::CreateCamera(1920.0f, 1080.0f);
+	glm::mat4 vpMatrix = glm::mat4(1.0f);
+	glm::mat4 modelMatrix = glm::mat4(1.0f);
+
+
 public:
 	SquareLayer(const char* name, bool isOverlay)
-		: ZGM::Layer(name, isOverlay) 
+		: ZGM::Layer(name, isOverlay)
 		{
 			// 1. Vertex Array
 			vertexArray = Render::GeometryFabric::CreateVertexArray();
@@ -110,10 +128,10 @@ public:
 			using Vertex = Render::Vertex;
 
 			const Vertex vertices[4] = {
-				{-0.5f, -0.5f, 0.0f, 1.0f,		0.0f, 0.0f},
-				{0.5f,	-0.5f, 0.0f, 1.0f,		1.0f, 0.0f},
-				{0.5f,	 0.5f, 0.0f, 1.0f,		1.0f, 1.0f},
-				{-0.5f,  0.5f, 0.0f, 1.0f,		0.0f, 1.0f}
+				{860.0f,	440.0f,		0.0f, 1.0f,		0.0f, 0.0f},
+				{1060.0f,	440.0f,		0.0f, 1.0f,		1.0f, 0.0f},
+				{1060.0f,	640.0f,		0.0f, 1.0f,		1.0f, 1.0f},
+				{860.0f,	640.0f,		0.0f, 1.0f,		0.0f, 1.0f}
 			};
 
 		
@@ -150,19 +168,24 @@ public:
 			shader->SetUniform1i("u_texture", 0);
 
 			renderer = new Render::OGLRenderer();
-		}
+		}	
+
+	void OnUpdate() override {
+		vpMatrix = camera.GetVPMatrix();
+		// Model Matrix
+	}
+
 
 	void OnRender() override {
 		renderer->BeginScene();
 		shader->Bind();
 		vertexArray->Bind();
+		shader->SetUniformMat4f("u_VP", vpMatrix); // VP from Camera Obj
+		shader->SetUniformMat4f("u_Model", modelMatrix); // Define Here
 		renderer->Submit();
 		renderer->EndScene();
 	}
 
-	void OnEvent(ZGM::Event& event) override {
-
-	}
 
 	~SquareLayer() {
 		delete vertexBuffer;
@@ -174,9 +197,9 @@ public:
 class Sandbox : public ZGM::Application {
 public:
 	Sandbox() {
+		SquareLayer* sl = new SquareLayer("Square", false);
 		DebugLayer* dl = new DebugLayer("ImGUI Debug", true, m_windowObj->GetWindow());
 		InputPollingLayer* ipl = new InputPollingLayer("Input Polling", "true", m_windowObj->GetWindow());
-		SquareLayer* sl = new SquareLayer("Square", false);
 		m_layerStack.InsertLayer(dl);
 		m_layerStack.InsertLayer(ipl);
 		m_layerStack.InsertLayer(sl);

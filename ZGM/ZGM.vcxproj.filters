@@ -582,6 +582,9 @@
     <ClInclude Include="src\ZGM\Rendering\RendererFabric.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\ZGM\Rendering\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ZGM\Application.cpp">
@@ -678,6 +681,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\ZGM\Rendering\IndexBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ZGM\Rendering\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

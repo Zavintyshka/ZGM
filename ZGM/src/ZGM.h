@@ -19,3 +19,5 @@
 
 #include "ZGM/Layer.h"
 #include "ZGM/Input.h"
+
+#include "ZGM/Rendering/Camera.h"

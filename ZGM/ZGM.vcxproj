@@ -17,6 +17,7 @@
     <ClInclude Include="src\Events\EventMouse.h" />
     <ClInclude Include="src\Tools\Exception.h" />
     <ClInclude Include="src\Tools\GeneralTools.h" />
+    <ClInclude Include="src\ZGM\Rendering\Camera.h" />
     <ClInclude Include="src\ZGM\Rendering\IndexBuffer.h" />
     <ClInclude Include="src\ZGM\Rendering\RendererFabric.h" />
     <ClInclude Include="src\ZGM\Rendering\VertexArray.h" />
@@ -207,6 +208,7 @@
     <ClCompile Include="src\glad.cpp" />
     <ClCompile Include="src\Tools\Exception.cpp" />
     <ClCompile Include="src\Tools\GeneralTools.cpp" />
+    <ClCompile Include="src\ZGM\Rendering\Camera.cpp" />
     <ClCompile Include="src\ZGM\Rendering\IndexBuffer.cpp" />
     <ClCompile Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\OGLIndexBuffer.cpp" />
     <ClCompile Include="src\ZGM\Rendering\RenderAPI\OpenGLRenderAPI\OGLCore.cpp" />

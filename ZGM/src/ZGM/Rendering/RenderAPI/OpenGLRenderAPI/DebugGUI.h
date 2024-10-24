@@ -24,6 +24,7 @@ public:
 	bool Begin(const char* title);
 	bool Button(const char* title);
 	void Text(const char* text);
+	void SliderF(const char* label, float* value, float value_min, float value_max);
 	void End();
 
 public:

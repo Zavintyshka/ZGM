@@ -132,9 +132,8 @@ namespace Render {
         glUniform1f(GetUniformLocation(varName), value);
     }
 
-    void OGLShader::SetUniformMat4f(const std::string& varName, glm::mat4& projMatrix)
-    {
-        glUniformMatrix4fv(GetUniformLocation(varName), 1, GL_FALSE, &projMatrix[0][0]);
+    void OGLShader::SetUniformMat4f(const std::string& varName, glm::mat4& matrix) {
+        glUniformMatrix4fv(GetUniformLocation(varName), 1, GL_FALSE, &matrix[0][0]);
     }
 }
 

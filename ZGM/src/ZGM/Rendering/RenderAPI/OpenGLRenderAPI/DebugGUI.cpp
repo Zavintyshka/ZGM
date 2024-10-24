@@ -78,6 +78,11 @@ void DebugGUI::Text(const char* text) {
     ImGui::Text(text);
 }
 
+void DebugGUI::SliderF(const char* label, float* value, float value_min, float value_max)
+{
+    ImGui::SliderFloat(label, value, value_min, value_max);
+}
+
 void DebugGUI::End() {
     ImGui::End();
 }

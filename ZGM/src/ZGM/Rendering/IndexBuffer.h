@@ -3,7 +3,7 @@
 
 
 namespace Render {
-	class IndexBuffer {
+	class ZGM_API IndexBuffer {
 	protected:
 		unsigned int m_indexBufferID;
 		const unsigned int* m_indexBuffer;

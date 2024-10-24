@@ -3,13 +3,18 @@
 class DebugLayer : public ZGM::Layer {
 private:
 	DebugGUI m_debugGUI;
-	Render::Camera& camera = Render::Camera::CreateCamera(1920.0f, 1080.0f);
-	float m_cameraPosX = camera.GetPos().x, m_cameraPosY = camera.GetPos().y;
+	Render::Camera& m_camera = Render::Camera::GetCamera();
+	float m_cameraPosX, m_cameraPosY, m_cameraRotation;
 
 public:
 	DebugLayer(const char* name, bool isOverlay, GLFWwindow* windowPtr)
 		: Layer(name, isOverlay), m_debugGUI(windowPtr, "#version 460", 1.5)
 	{
+		const glm::vec2& cameraPos = m_camera.GetPos();
+		m_cameraPosX = cameraPos.x;
+		m_cameraPosY = cameraPos.y;
+		m_cameraRotation = m_camera.GetRotation();
+
 		m_debugGUI.GetIO().ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 		m_debugGUI.GetIO().ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 	};
@@ -26,12 +31,15 @@ public:
 		m_debugGUI.NewFrame();
 
 		m_debugGUI.Begin("Camera Propeties");
-		m_debugGUI.Text("Camera Position:");
 
+		m_debugGUI.Text("Camera Position:");
 		m_debugGUI.Text(std::to_string(m_cameraPosX).c_str());
 		m_debugGUI.Text(std::to_string(m_cameraPosY).c_str());
 		m_debugGUI.SliderF("CameraPosX", &m_cameraPosX, -400.0f, 400.0f);
 		m_debugGUI.SliderF("CameraPosY", &m_cameraPosY, -400.0f, 400.0f);
+
+		m_debugGUI.Text("Camera Rotation:");
+		m_debugGUI.SliderF("CameraRotation", &m_cameraRotation, 0, 360.0f);
 		m_debugGUI.End();
 
 		UpdateCameraData();
@@ -72,7 +80,9 @@ public:
 private:
 	void UpdateCameraData() {
 		glm::vec2 newCameraPos = glm::vec2(m_cameraPosX, m_cameraPosY);
-		camera.SetPos(newCameraPos);
+		m_camera.SetPos(newCameraPos);
+		m_camera.SetRotation(m_cameraRotation);
+		m_camera.UpdateVP();
 	}
 };
 
@@ -112,9 +122,7 @@ private:
 	Render::Renderer* renderer;
 
 	// Camera
-	Render::Camera& camera = Render::Camera::CreateCamera(1920.0f, 1080.0f);
-	glm::mat4 vpMatrix = glm::mat4(1.0f);
-	glm::mat4 modelMatrix = glm::mat4(1.0f);
+	Render::Camera& m_camera = Render::Camera::GetCamera();
 
 
 public:
@@ -170,19 +178,10 @@ public:
 			renderer = new Render::OGLRenderer();
 		}	
 
-	void OnUpdate() override {
-		vpMatrix = camera.GetVPMatrix();
-		// Model Matrix
-	}
-
 
 	void OnRender() override {
-		renderer->BeginScene();
-		shader->Bind();
-		vertexArray->Bind();
-		shader->SetUniformMat4f("u_VP", vpMatrix); // VP from Camera Obj
-		shader->SetUniformMat4f("u_Model", modelMatrix); // Define Here
-		renderer->Submit();
+		renderer->BeginScene(m_camera);
+		renderer->Submit(*shader, *vertexArray, indexBuffer->GetCount());
 		renderer->EndScene();
 	}
 

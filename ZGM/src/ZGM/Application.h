@@ -4,6 +4,7 @@
 #include "Layer.h"
 #include "WindowAPI.h"
 #include "Input.h"
+#include "ZGM/Rendering/Camera.h"
 
 #include "ZGM/Rendering/RendererFabric.h"
 
@@ -22,7 +23,7 @@ namespace ZGM {
 	protected:
 		std::unique_ptr<Window> m_windowObj;
 		LayerStack m_layerStack;
-
+		Render::Camera& m_camera = Render::Camera::GetCamera();
 
 	public:
 		Application();

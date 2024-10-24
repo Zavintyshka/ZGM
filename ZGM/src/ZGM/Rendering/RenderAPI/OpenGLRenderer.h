@@ -5,10 +5,17 @@
 namespace Render {
 	class ZGM_API OGLRenderer: public Renderer {
 	private:
+		struct SceneData {
+			glm::mat4 vpMatrix;
+			unsigned int indexCount;
+		};
+
+		static SceneData* m_sceneData;
+
 	public:
-		void BeginScene() override;
+		void BeginScene(Camera& camera) override;
 		void EndScene() override;
-		void Submit() override;
+		void Submit(Shader& shader, VertexArray& vertexArray, unsigned int indexCount) override;
 		void DrawIndexed() override;
 	};
 

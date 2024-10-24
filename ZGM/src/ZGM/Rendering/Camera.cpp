@@ -2,35 +2,43 @@
 #include "Camera.h"
 
 namespace Render {
-	Camera::Camera(float winWidth, float winHeight)
-	: m_winWidth(winWidth), m_winHeight(winHeight)
-	{
-		m_projMatrix = glm::ortho(0.0f, winWidth, 0.0f, winHeight, -1.0f, 1.0f);
-		m_vpMatrix = m_projMatrix * m_viewMatrix;
-	}
-
 	void Camera::UpdateVP()
 	{
-		m_translation = glm::vec3(-m_posX, -m_posY, 0.0f);
-		m_viewMatrix = glm::translate(m_identityMatrix, m_translation);
+		m_translation = glm::vec3(-m_position.x, -m_position.y, 0.0f);
+		m_viewMatrix = glm::translate(m_identityMatrix, m_translation) * glm::rotate(m_identityMatrix, glm::radians(m_rotation), glm::vec3(0.0f, 0.0f, 1.0f));
 		m_vpMatrix = m_projMatrix * m_viewMatrix;
 	}
 
-	glm::vec2 Camera::GetPos() const
+	void Camera::Initialize(float winWidth, float winHeight)
 	{
-		return glm::vec2(m_posX, m_posY);
+		m_winWidth = winWidth;
+		m_winHeight = winHeight;
+
+		m_projMatrix = glm::ortho(0.0f, m_winWidth, 0.0f, m_winHeight, -1.0f, 1.0f);
+		m_vpMatrix = m_projMatrix * m_viewMatrix;
 	}
 
-	glm::mat4 Camera::GetVPMatrix() const
+	const glm::vec2& Camera::GetPos() const
+	{
+		return m_position;
+	}
+
+	const glm::mat4& Camera::GetVPMatrix() const
 	{
 		return m_vpMatrix;
 	}
 
-	void Camera::SetPos(glm::vec2 pos)
+	void Camera::SetPos(glm::vec2& pos)
+	{	
+		m_position = pos;
+	}
+	const float Camera::GetRotation() const
 	{
-		m_posX = pos.x;
-		m_posY = pos.y;
-		UpdateVP();
+		return m_rotation;
+	}
+	void Camera::SetRotation(float rotation)
+	{
+		m_rotation = rotation;
 	}
 }
 

@@ -12,6 +12,7 @@ namespace ZGM {
 		m_renderCommand = Render::RendererFabric::CreateRenderCommand();
 		m_windowObj->SetEventCallbackFN(BIND_EVENT_CALLBACK(Application::OnEvent));
 		m_inputPolling = new Input(m_windowObj->GetWindow());
+		m_camera.Initialize((float)m_windowObj->GetWidth(), (float)m_windowObj->GetHeight());
 	}
 
 	Application::~Application()
